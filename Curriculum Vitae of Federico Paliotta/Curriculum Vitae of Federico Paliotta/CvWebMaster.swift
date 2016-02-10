@@ -54,7 +54,14 @@ struct CvWebMaster {
         let telephoneNumber = cv.me?.phoneNumbers.first?.value as? CNPhoneNumber ?? CNPhoneNumber(stringValue: "")
         let telephoneItem = HtmlTagGenerator.li("m: \(telephoneNumber.stringValue)")
         
-        let listContent = emailItem + telephoneItem
+        var listContent = emailItem + telephoneItem
+        
+        let blog = cv.blog
+        if (blog != "") {
+            let blogItem = HtmlTagGenerator.li("b: \(blog)")
+            listContent += blogItem
+        }
+        
         let contactDetails = HtmlTagGenerator.ul(listContent)
         let contactDetailsDiv = HtmlTagGenerator.div(contactDetails, id: "contactDetails", `class`: "quickFade delayFour")
         

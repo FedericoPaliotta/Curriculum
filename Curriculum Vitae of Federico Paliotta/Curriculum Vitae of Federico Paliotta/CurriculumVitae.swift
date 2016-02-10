@@ -15,6 +15,7 @@ class CurriculumVitae : NSObject, NSCoding
     
     var me: CNContact!
     var title: String!
+    var blog: String!
     var profile: String?
     var jobs: [Job]!
     var education: [Education]!
@@ -49,7 +50,7 @@ class CurriculumVitae : NSObject, NSCoding
         
         // Telephones
         contact.phoneNumbers = [CNLabeledValue(label: CNLabelPhoneNumberMain,
-                                               value: CNPhoneNumber(stringValue: "+1 (918) 998 2674")),
+                                               value: CNPhoneNumber(stringValue: "+1 (646) 727 8755")),
                                 CNLabeledValue(label: CNLabelOther,
                                                value: CNPhoneNumber(stringValue: "+39 (349) 4757 977"))]
         
@@ -68,6 +69,8 @@ class CurriculumVitae : NSObject, NSCoding
         // MARK: Title
         title = "iOS Developer"
         
+        // MARK: Blog
+        blog = "::link:: http://scienceisart.noblogs.org :: Science Is Art :;"
        
         // MARK: Jobs
         jobs = [
@@ -131,7 +134,7 @@ class CurriculumVitae : NSObject, NSCoding
         
        
         // MARK: Personal Profile
-        profile = "In just three words I'd say I'm a dreamer, an intense perfectionist, and a software engineer. Above all, I like to think of software developing as an art, and of myself, as a bit of an artist. My emphasis when developing is on elegance and clarity in implementation, decoupling and code reusability, robust architecture, and extensive testing on both funcionality and perfomance, especially regarding worst case scenarios. \n\n I graduated in \(education.last!.yearOfGraduation) from \(education.last!.istitute). After graduating with a \(education.last!.degree), I decided to leave Italy and start over in the heart of North America, the mid-west United States. \n Since working on my graduation thesis project, in which I embedded calls to C functions from a computer vision framework (OpenCV) into an iOS App through the usage of C/Objective-C custom bridging classes, I've become more interested in iOS development and, as the time goes by, increaingly knowledgeable as well. [::link:: https://www.dropbox.com/sh/bofeirz2kuf90v9/AADZ1MfokqYlIKFbP3KMJOY5a?dl=0 :: Thesis Project in Italian :;] \n\n During my time in North America, I've been employed full time at ::link:: http://hotcoffeydesign.com :: Hot Coffey Design :;, one of the most successful web and mobile design and development companies in the continental US. While working at HCD I’ve largely improved my skills in UI design and the architectural aspects of developing, and gained experience in working closely with the client in order to meet the exact user experience desired."
+        profile = "In just three words I'd say I'm a dreamer, an intense perfectionist, and a software engineer. Above all, I like to think of software developing as an art, and of myself, as a bit of an artist. My emphasis when developing is on elegance and clarity in implementation, decoupling and code reusability, robust architecture, and extensive testing on both funcionality and perfomance, especially regarding worst case scenarios. \n\n I graduated in \(education.last!.yearOfGraduation) from \(education.last!.istitute). After graduating with a \(education.last!.degree), I decided to leave Italy and start over in the heart of North America, the mid-west United States. \n Since working on my graduation thesis project, in which I embedded calls to C functions from a computer vision framework (OpenCV) into an iOS App through the usage of C/Objective-C custom bridging classes, I've become more interested in iOS development and, as the time goes by, increaingly knowledgeable as well. [::link:: https://github.com/FedericoPaliotta/Thesis-Project---Bonsai-Due.git :: Thesis Project in Italian :;] \n\n During my time in North America, I've been employed full time at ::link:: http://hotcoffeydesign.com :: Hot Coffey Design :;, one of the most successful web and mobile design and development companies in the continental US. While working at HCD I’ve largely improved my skills in UI design and the architectural aspects of developing, and gained experience in working closely with the client in order to meet the exact user experience desired."
 
         super.init()
     }
