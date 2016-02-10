@@ -1,0 +1,360 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		860C162F1BEDC50F0097F33D /* index-william.html in Resources */ = {isa = PBXBuildFile; fileRef = 860C162E1BEDC50F0097F33D /* index-william.html */; };
+		862D314D1BEC4F7A00DA6F7C /* style-william.css in Resources */ = {isa = PBXBuildFile; fileRef = 862D314C1BEC4F7A00DA6F7C /* style-william.css */; };
+		863732FA1BF51EC500F53048 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863732F91BF51EC500F53048 /* ContactViewController.swift */; };
+		863732FC1BF5CF2D00F53048 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863732FB1BF5CF2D00F53048 /* ProfileViewController.swift */; };
+		864C05461BE5C7E30010424D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C052A1BE5C7E30010424D /* AppDelegate.swift */; };
+		864C05561BE5C7E30010424D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 864C053C1BE5C7E30010424D /* LaunchScreen.storyboard */; };
+		864C05571BE5C7E30010424D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 864C053E1BE5C7E30010424D /* Main.storyboard */; };
+		864C05581BE5C7E30010424D /* CurriculumVitae.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C05401BE5C7E30010424D /* CurriculumVitae.swift */; };
+		864C05591BE5C7E30010424D /* index-omero.html in Resources */ = {isa = PBXBuildFile; fileRef = 864C05411BE5C7E30010424D /* index-omero.html */; };
+		864C055B1BE5C7E30010424D /* profilePicture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 864C05431BE5C7E30010424D /* profilePicture.jpg */; };
+		864C055C1BE5C7E30010424D /* style-omero.css in Resources */ = {isa = PBXBuildFile; fileRef = 864C05441BE5C7E30010424D /* style-omero.css */; };
+		864C055D1BE5C7E30010424D /* CurriculumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C05451BE5C7E30010424D /* CurriculumViewController.swift */; };
+		864C055F1BE7CC430010424D /* CvWebMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C055E1BE7CC430010424D /* CvWebMaster.swift */; };
+		866E89021BE9879500DDF947 /* ContantsAndSegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866E89011BE9879500DDF947 /* ContantsAndSegueIdentifiers.swift */; };
+		869E68FC1BF2EC9F00C843F8 /* CustomCellClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869E68FB1BF2EC9F00C843F8 /* CustomCellClasses.swift */; };
+		86A345A91BEEFC620050257D /* AddYoursTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A345A81BEEFC620050257D /* AddYoursTabBarViewController.swift */; };
+		86DF95291C010CED000E1929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86DF95281C010CED000E1929 /* Assets.xcassets */; };
+		86DF952B1C0170F2000E1929 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DF952A1C0170F2000E1929 /* JobsViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		860C162E1BEDC50F0097F33D /* index-william.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "index-william.html"; path = "Curriculum Vitae of Federico Paliotta/index-william.html"; sourceTree = SOURCE_ROOT; };
+		862D314C1BEC4F7A00DA6F7C /* style-william.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "style-william.css"; path = "Curriculum Vitae of Federico Paliotta/style-william.css"; sourceTree = SOURCE_ROOT; };
+		863732F91BF51EC500F53048 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactViewController.swift; path = "Curriculum Vitae of Federico Paliotta/ContactViewController.swift"; sourceTree = SOURCE_ROOT; };
+		863732FB1BF5CF2D00F53048 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = "Curriculum Vitae of Federico Paliotta/ProfileViewController.swift"; sourceTree = SOURCE_ROOT; };
+		86464FE51BE0022E00F5115C /* Curriculum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Curriculum.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		864C052A1BE5C7E30010424D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Curriculum Vitae of Federico Paliotta/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
+		864C053D1BE5C7E30010424D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		864C053F1BE5C7E30010424D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		864C05401BE5C7E30010424D /* CurriculumVitae.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurriculumVitae.swift; path = "Curriculum Vitae of Federico Paliotta/CurriculumVitae.swift"; sourceTree = SOURCE_ROOT; };
+		864C05411BE5C7E30010424D /* index-omero.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "index-omero.html"; path = "Curriculum Vitae of Federico Paliotta/index-omero.html"; sourceTree = SOURCE_ROOT; };
+		864C05421BE5C7E30010424D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Curriculum Vitae of Federico Paliotta/Info.plist"; sourceTree = SOURCE_ROOT; };
+		864C05431BE5C7E30010424D /* profilePicture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = profilePicture.jpg; path = "Curriculum Vitae of Federico Paliotta/profilePicture.jpg"; sourceTree = SOURCE_ROOT; };
+		864C05441BE5C7E30010424D /* style-omero.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "style-omero.css"; path = "Curriculum Vitae of Federico Paliotta/style-omero.css"; sourceTree = SOURCE_ROOT; };
+		864C05451BE5C7E30010424D /* CurriculumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurriculumViewController.swift; path = "Curriculum Vitae of Federico Paliotta/CurriculumViewController.swift"; sourceTree = SOURCE_ROOT; };
+		864C055E1BE7CC430010424D /* CvWebMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CvWebMaster.swift; path = "Curriculum Vitae of Federico Paliotta/CvWebMaster.swift"; sourceTree = SOURCE_ROOT; };
+		866E89011BE9879500DDF947 /* ContantsAndSegueIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContantsAndSegueIdentifiers.swift; path = "Curriculum Vitae of Federico Paliotta/ContantsAndSegueIdentifiers.swift"; sourceTree = SOURCE_ROOT; };
+		869E68FB1BF2EC9F00C843F8 /* CustomCellClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCellClasses.swift; path = "Curriculum Vitae of Federico Paliotta/CustomCellClasses.swift"; sourceTree = SOURCE_ROOT; };
+		86A345A81BEEFC620050257D /* AddYoursTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddYoursTabBarViewController.swift; path = "Curriculum Vitae of Federico Paliotta/AddYoursTabBarViewController.swift"; sourceTree = SOURCE_ROOT; };
+		86DF95281C010CED000E1929 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Curriculum Vitae of Federico Paliotta/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+		86DF952A1C0170F2000E1929 /* JobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JobsViewController.swift; path = "Curriculum Vitae of Federico Paliotta/JobsViewController.swift"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		86464FE21BE0022E00F5115C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		86464FDC1BE0022E00F5115C = {
+			isa = PBXGroup;
+			children = (
+				86464FE71BE0022E00F5115C /* Curriculum */,
+				86464FE61BE0022E00F5115C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		86464FE61BE0022E00F5115C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				86464FE51BE0022E00F5115C /* Curriculum.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		86464FE71BE0022E00F5115C /* Curriculum */ = {
+			isa = PBXGroup;
+			children = (
+				863732FB1BF5CF2D00F53048 /* ProfileViewController.swift */,
+				869E68FB1BF2EC9F00C843F8 /* CustomCellClasses.swift */,
+				864C052A1BE5C7E30010424D /* AppDelegate.swift */,
+				86A345A81BEEFC620050257D /* AddYoursTabBarViewController.swift */,
+				863732F91BF51EC500F53048 /* ContactViewController.swift */,
+				864C05451BE5C7E30010424D /* CurriculumViewController.swift */,
+				864C05401BE5C7E30010424D /* CurriculumVitae.swift */,
+				864C055E1BE7CC430010424D /* CvWebMaster.swift */,
+				866E89011BE9879500DDF947 /* ContantsAndSegueIdentifiers.swift */,
+				86DF952A1C0170F2000E1929 /* JobsViewController.swift */,
+				864C053E1BE5C7E30010424D /* Main.storyboard */,
+				864C053C1BE5C7E30010424D /* LaunchScreen.storyboard */,
+				86DF95281C010CED000E1929 /* Assets.xcassets */,
+				864C05411BE5C7E30010424D /* index-omero.html */,
+				860C162E1BEDC50F0097F33D /* index-william.html */,
+				864C05441BE5C7E30010424D /* style-omero.css */,
+				862D314C1BEC4F7A00DA6F7C /* style-william.css */,
+				864C05431BE5C7E30010424D /* profilePicture.jpg */,
+				864C05421BE5C7E30010424D /* Info.plist */,
+			);
+			path = Curriculum;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		86464FE41BE0022E00F5115C /* Curriculum */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86464FF71BE0022E00F5115C /* Build configuration list for PBXNativeTarget "Curriculum" */;
+			buildPhases = (
+				86464FE11BE0022E00F5115C /* Sources */,
+				86464FE21BE0022E00F5115C /* Frameworks */,
+				86464FE31BE0022E00F5115C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Curriculum;
+			productName = Curriculum;
+			productReference = 86464FE51BE0022E00F5115C /* Curriculum.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		86464FDD1BE0022E00F5115C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				KnownAssetTags = (
+					test,
+				);
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Federico Paliotta";
+				TargetAttributes = {
+					86464FE41BE0022E00F5115C = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 72H6D5R7Q6;
+					};
+				};
+			};
+			buildConfigurationList = 86464FE01BE0022E00F5115C /* Build configuration list for PBXProject "Curriculum" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 86464FDC1BE0022E00F5115C;
+			productRefGroup = 86464FE61BE0022E00F5115C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				86464FE41BE0022E00F5115C /* Curriculum */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		86464FE31BE0022E00F5115C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				860C162F1BEDC50F0097F33D /* index-william.html in Resources */,
+				862D314D1BEC4F7A00DA6F7C /* style-william.css in Resources */,
+				864C05561BE5C7E30010424D /* LaunchScreen.storyboard in Resources */,
+				864C055B1BE5C7E30010424D /* profilePicture.jpg in Resources */,
+				864C055C1BE5C7E30010424D /* style-omero.css in Resources */,
+				864C05571BE5C7E30010424D /* Main.storyboard in Resources */,
+				86DF95291C010CED000E1929 /* Assets.xcassets in Resources */,
+				864C05591BE5C7E30010424D /* index-omero.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		86464FE11BE0022E00F5115C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86A345A91BEEFC620050257D /* AddYoursTabBarViewController.swift in Sources */,
+				866E89021BE9879500DDF947 /* ContantsAndSegueIdentifiers.swift in Sources */,
+				864C055F1BE7CC430010424D /* CvWebMaster.swift in Sources */,
+				864C055D1BE5C7E30010424D /* CurriculumViewController.swift in Sources */,
+				864C05581BE5C7E30010424D /* CurriculumVitae.swift in Sources */,
+				863732FA1BF51EC500F53048 /* ContactViewController.swift in Sources */,
+				863732FC1BF5CF2D00F53048 /* ProfileViewController.swift in Sources */,
+				864C05461BE5C7E30010424D /* AppDelegate.swift in Sources */,
+				86DF952B1C0170F2000E1929 /* JobsViewController.swift in Sources */,
+				869E68FC1BF2EC9F00C843F8 /* CustomCellClasses.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		864C053C1BE5C7E30010424D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				864C053D1BE5C7E30010424D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = "Curriculum Vitae of Federico Paliotta/Base.lproj";
+			sourceTree = SOURCE_ROOT;
+		};
+		864C053E1BE5C7E30010424D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				864C053F1BE5C7E30010424D /* Base */,
+			);
+			name = Main.storyboard;
+			path = "Curriculum Vitae of Federico Paliotta/Base.lproj";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		86464FF51BE0022E00F5115C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		86464FF61BE0022E00F5115C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		86464FF81BE0022E00F5115C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Curriculum Vitae of Federico Paliotta/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fpc.Curriculum;
+				PRODUCT_NAME = Curriculum;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		86464FF91BE0022E00F5115C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				INFOPLIST_FILE = "Curriculum Vitae of Federico Paliotta/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fpc.Curriculum;
+				PRODUCT_NAME = Curriculum;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		86464FE01BE0022E00F5115C /* Build configuration list for PBXProject "Curriculum" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86464FF51BE0022E00F5115C /* Debug */,
+				86464FF61BE0022E00F5115C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		86464FF71BE0022E00F5115C /* Build configuration list for PBXNativeTarget "Curriculum" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86464FF81BE0022E00F5115C /* Debug */,
+				86464FF91BE0022E00F5115C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 86464FDD1BE0022E00F5115C /* Project object */;
+}
