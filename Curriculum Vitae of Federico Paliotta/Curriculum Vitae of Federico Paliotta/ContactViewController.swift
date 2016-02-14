@@ -26,6 +26,7 @@ UITableViewDataSource, UITextFieldDelegate, UITabBarControllerDelegate, UINaviga
                 editableContact!.postalAddresses = contactToSave!.postalAddresses
                 editableContact!.emailAddresses = contactToSave!.emailAddresses
                 editableContact!.phoneNumbers = contactToSave!.phoneNumbers
+                editableContact!.imageData = contactToSave!.imageData
             }
         }
     }
@@ -104,7 +105,9 @@ UITableViewDataSource, UITextFieldDelegate, UITabBarControllerDelegate, UINaviga
         firstName.text = contactToSave?.givenName
         middleName.text = contactToSave?.middleName
         lastName.text = contactToSave?.familyName
-        
+        if let imgData = contactToSave?.imageData {
+            profileImage.image = UIImage(data: imgData)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -114,7 +117,7 @@ UITableViewDataSource, UITextFieldDelegate, UITabBarControllerDelegate, UINaviga
         
         if let addEditTabBarController = tabBarController as? AddYoursTabBarViewController {
             addEditTabBarController.contact = editableContact
-        }        
+        }
     }
         
 
@@ -308,6 +311,11 @@ UITableViewDataSource, UITextFieldDelegate, UITabBarControllerDelegate, UINaviga
         }
         else if let pickedOriginalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             profileImage.image = pickedOriginalImage
+        }
+        
+        // Here the imageData property on the editableContact gets set
+        if let img = profileImage.image {
+            editableContact?.imageData = UIImagePNGRepresentation(img)
         }
         
         dismissViewControllerAnimated(true, completion: nil)

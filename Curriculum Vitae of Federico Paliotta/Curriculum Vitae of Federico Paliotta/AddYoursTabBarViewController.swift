@@ -21,7 +21,7 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
 {
     
     var curriculumToSave: CurriculumVitae!
-        { didSet { print("I GOT SET") } }
+//        { didSet { print("I GOT SET") } }
     
     var contact: CNContact?
     

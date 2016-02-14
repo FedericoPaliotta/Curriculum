@@ -56,8 +56,8 @@ struct CvWebMaster {
         
         var listContent = emailItem + telephoneItem
         
-        let blog = cv.blog
-        if (blog != "") {
+        
+        if let blog = cv.blog where blog != "" {
             let blogItem = HtmlTagGenerator.li("b: \(blog)")
             listContent += blogItem
         }
