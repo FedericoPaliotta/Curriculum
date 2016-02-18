@@ -36,7 +36,7 @@ struct CvWebMaster {
         
         
         // MARK: --- Main Details
-        let headShotImg = HtmlTagGenerator.img("profilePicture.jpg", alt: cv.me != nil ? cv.me!.fullName : "" ) /// TODO: make this not hard-coded !!!
+        let headShotImg = HtmlTagGenerator.img("myProfilePicture.jpg", alt: cv.me != nil ? cv.me!.fullName : "" ) /// TODO: make this not hard-coded !!!
         let headShotDiv = HtmlTagGenerator.div(headShotImg, id: "headshot", `class`: "quickFade")
         
         // Main Details Composition

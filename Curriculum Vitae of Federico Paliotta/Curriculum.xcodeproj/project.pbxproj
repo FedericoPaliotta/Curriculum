@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B3E189C1C763CF2004E7B9C /* profilePicture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1B3E189B1C763CF2004E7B9C /* profilePicture.jpg */; };
 		860C162F1BEDC50F0097F33D /* index-william.html in Resources */ = {isa = PBXBuildFile; fileRef = 860C162E1BEDC50F0097F33D /* index-william.html */; };
 		862D314D1BEC4F7A00DA6F7C /* style-william.css in Resources */ = {isa = PBXBuildFile; fileRef = 862D314C1BEC4F7A00DA6F7C /* style-william.css */; };
 		863732FA1BF51EC500F53048 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863732F91BF51EC500F53048 /* ContactViewController.swift */; };
@@ -16,7 +17,7 @@
 		864C05571BE5C7E30010424D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 864C053E1BE5C7E30010424D /* Main.storyboard */; };
 		864C05581BE5C7E30010424D /* CurriculumVitae.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C05401BE5C7E30010424D /* CurriculumVitae.swift */; };
 		864C05591BE5C7E30010424D /* index-omero.html in Resources */ = {isa = PBXBuildFile; fileRef = 864C05411BE5C7E30010424D /* index-omero.html */; };
-		864C055B1BE5C7E30010424D /* profilePicture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 864C05431BE5C7E30010424D /* profilePicture.jpg */; };
+		864C055B1BE5C7E30010424D /* myProfilePicture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 864C05431BE5C7E30010424D /* myProfilePicture.jpg */; };
 		864C055C1BE5C7E30010424D /* style-omero.css in Resources */ = {isa = PBXBuildFile; fileRef = 864C05441BE5C7E30010424D /* style-omero.css */; };
 		864C055D1BE5C7E30010424D /* CurriculumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C05451BE5C7E30010424D /* CurriculumViewController.swift */; };
 		864C055F1BE7CC430010424D /* CvWebMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C055E1BE7CC430010424D /* CvWebMaster.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B3E189B1C763CF2004E7B9C /* profilePicture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = profilePicture.jpg; path = ../../../../../profilePicture.jpg; sourceTree = "<group>"; };
 		860C162E1BEDC50F0097F33D /* index-william.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "index-william.html"; path = "Curriculum Vitae of Federico Paliotta/index-william.html"; sourceTree = SOURCE_ROOT; };
 		862D314C1BEC4F7A00DA6F7C /* style-william.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "style-william.css"; path = "Curriculum Vitae of Federico Paliotta/style-william.css"; sourceTree = SOURCE_ROOT; };
 		863732F91BF51EC500F53048 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactViewController.swift; path = "Curriculum Vitae of Federico Paliotta/ContactViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -39,7 +41,7 @@
 		864C05401BE5C7E30010424D /* CurriculumVitae.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurriculumVitae.swift; path = "Curriculum Vitae of Federico Paliotta/CurriculumVitae.swift"; sourceTree = SOURCE_ROOT; };
 		864C05411BE5C7E30010424D /* index-omero.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "index-omero.html"; path = "Curriculum Vitae of Federico Paliotta/index-omero.html"; sourceTree = SOURCE_ROOT; };
 		864C05421BE5C7E30010424D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Curriculum Vitae of Federico Paliotta/Info.plist"; sourceTree = SOURCE_ROOT; };
-		864C05431BE5C7E30010424D /* profilePicture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = profilePicture.jpg; path = "Curriculum Vitae of Federico Paliotta/profilePicture.jpg"; sourceTree = SOURCE_ROOT; };
+		864C05431BE5C7E30010424D /* myProfilePicture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = myProfilePicture.jpg; path = "Curriculum Vitae of Federico Paliotta/myProfilePicture.jpg"; sourceTree = SOURCE_ROOT; };
 		864C05441BE5C7E30010424D /* style-omero.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "style-omero.css"; path = "Curriculum Vitae of Federico Paliotta/style-omero.css"; sourceTree = SOURCE_ROOT; };
 		864C05451BE5C7E30010424D /* CurriculumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurriculumViewController.swift; path = "Curriculum Vitae of Federico Paliotta/CurriculumViewController.swift"; sourceTree = SOURCE_ROOT; };
 		864C055E1BE7CC430010424D /* CvWebMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CvWebMaster.swift; path = "Curriculum Vitae of Federico Paliotta/CvWebMaster.swift"; sourceTree = SOURCE_ROOT; };
@@ -97,7 +99,8 @@
 				860C162E1BEDC50F0097F33D /* index-william.html */,
 				864C05441BE5C7E30010424D /* style-omero.css */,
 				862D314C1BEC4F7A00DA6F7C /* style-william.css */,
-				864C05431BE5C7E30010424D /* profilePicture.jpg */,
+				864C05431BE5C7E30010424D /* myProfilePicture.jpg */,
+				1B3E189B1C763CF2004E7B9C /* profilePicture.jpg */,
 				864C05421BE5C7E30010424D /* Info.plist */,
 			);
 			path = Curriculum;
@@ -168,10 +171,11 @@
 				860C162F1BEDC50F0097F33D /* index-william.html in Resources */,
 				862D314D1BEC4F7A00DA6F7C /* style-william.css in Resources */,
 				864C05561BE5C7E30010424D /* LaunchScreen.storyboard in Resources */,
-				864C055B1BE5C7E30010424D /* profilePicture.jpg in Resources */,
+				864C055B1BE5C7E30010424D /* myProfilePicture.jpg in Resources */,
 				864C055C1BE5C7E30010424D /* style-omero.css in Resources */,
 				864C05571BE5C7E30010424D /* Main.storyboard in Resources */,
 				86DF95291C010CED000E1929 /* Assets.xcassets in Resources */,
+				1B3E189C1C763CF2004E7B9C /* profilePicture.jpg in Resources */,
 				864C05591BE5C7E30010424D /* index-omero.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

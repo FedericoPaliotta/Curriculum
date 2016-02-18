@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -168,7 +167,7 @@
                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="JYU-7f-q9O" userLabel="Picture View">
                                                 <rect key="frame" x="20" y="50" width="560" height="314"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePicture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ces-Kl-cNu">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePicture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ces-Kl-cNu">
                                                         <rect key="frame" x="170" y="0.0" width="220" height="314"/>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="rgj-os-5fF">
@@ -712,55 +711,6 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l4d-Qv-Pqk" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePicture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="WrY-7s-tTu">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="WrY-7s-tTu" secondAttribute="height" multiplier="254:435" id="sAp-7o-kGJ"/>
-                                                    <constraint firstAttribute="height" constant="435" id="zZC-6F-Yfh"/>
-                                                </constraints>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="sAp-7o-kGJ"/>
-                                                        <exclude reference="zZC-6F-Yfh"/>
-                                                    </mask>
-                                                </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <mask key="constraints">
-                                                        <include reference="sAp-7o-kGJ"/>
-                                                        <exclude reference="zZC-6F-Yfh"/>
-                                                    </mask>
-                                                </variation>
-                                            </imageView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="WrY-7s-tTu" secondAttribute="trailing" constant="73" id="8Ni-4b-mZ7"/>
-                                            <constraint firstAttribute="bottom" secondItem="WrY-7s-tTu" secondAttribute="bottom" id="muK-nK-WLJ"/>
-                                            <constraint firstItem="WrY-7s-tTu" firstAttribute="leading" secondItem="l4d-Qv-Pqk" secondAttribute="leading" constant="73" id="yHV-id-6Kv"/>
-                                            <constraint firstItem="WrY-7s-tTu" firstAttribute="top" secondItem="l4d-Qv-Pqk" secondAttribute="top" constant="400" id="zh2-10-ohK"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="subviews">
-                                                <exclude reference="WrY-7s-tTu"/>
-                                            </mask>
-                                            <mask key="constraints">
-                                                <exclude reference="8Ni-4b-mZ7"/>
-                                                <exclude reference="muK-nK-WLJ"/>
-                                                <exclude reference="yHV-id-6Kv"/>
-                                                <exclude reference="zh2-10-ohK"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
-                                            <mask key="subviews">
-                                                <include reference="WrY-7s-tTu"/>
-                                            </mask>
-                                            <mask key="constraints">
-                                                <include reference="8Ni-4b-mZ7"/>
-                                                <include reference="muK-nK-WLJ"/>
-                                                <include reference="yHV-id-6Kv"/>
-                                                <include reference="zh2-10-ohK"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
