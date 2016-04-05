@@ -9,15 +9,16 @@
 import UIKit
 import MessageUI
 
-class CurriculumViewController: UIViewController, MFMailComposeViewControllerDelegate, CurriculumEditorDelegate {
+var isTheDefaultModel = true
+
+class CurriculumViewController: UIViewController, MFMailComposeViewControllerDelegate, UIScrollViewDelegate, CurriculumEditorDelegate {
 
     let defaults = NSUserDefaults.standardUserDefaults()
-    var isTheDefaultModel = true
-    var selectedTemplate = Templates.omero
+    var selectedTemplate = Templates.omero 
     var curriculumModel: CurriculumVitae {
         get {
             // Here I return the persistent curriculum if there's any, othewise I'm just 
-            // going to teturn the default "Curriculum Vitae of Federico Paliotta"
+            // going to return the default "Curriculum Vitae of Federico Paliotta"
             if let unarchivedObject = defaults.objectForKey(Constants.persistentCv) as? NSData {
                 if let persistentCurriculumModel = NSKeyedUnarchiver.unarchiveObjectWithData(unarchivedObject) as? CurriculumVitae {
                     isTheDefaultModel = false
@@ -39,61 +40,115 @@ class CurriculumViewController: UIViewController, MFMailComposeViewControllerDel
         }
     }
    
+    var underNavBarBottomLine: NSLayoutConstraint!
+    var underNavBarTopLine: NSLayoutConstraint!
+    
+    var menuIsCollapsed = true {
+        didSet {
+            if menuIsCollapsed {
+                self.menuButton.image = UIImage.init(imageLiteral: "Expand Arrow-48")
+            }
+            else {
+                self.menuButton.image = UIImage.init(imageLiteral: "Collapse Arrow-48")
+            }
+        }
+    }
+    
+    @IBOutlet weak var underNavBar: UIView!
     @IBOutlet weak var webViewer: UIWebView!
+    @IBOutlet weak var homeButton: UIBarButtonItem!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
-    @IBAction func action(sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        
-        alert.addAction(UIAlertAction(
-            title: "Send Via Email",
-            style: .Default,
-            handler: { (alertAction) -> Void in
-                self.emailCurriculum()
-        }))
-        
-        alert.addAction(UIAlertAction(
-            title: "Preview Pdf",
-            style: .Default,
-            handler: { (alertAction) -> Void in
-                self.printToPdf()
-        }))
-        
-        alert.addAction(UIAlertAction(
-            title: isTheDefaultModel ? "Delete and Add Yours" : "Edit Curriculum",
-            style: .Destructive,
-            handler: { (alertAction) -> Void in
-                self.showAddYoursViewController()
-        }))
-        
-        alert.addAction(UIAlertAction(
-            title: "Cancel",
-            style: .Cancel,
-            handler: nil))
-        
-        alert.modalPresentationStyle = .Popover
-        let ppc = alert.popoverPresentationController
-        ppc?.barButtonItem = sender
-        
-        presentViewController(alert, animated: true, completion: nil)
+    
+    @IBAction func sendViaEmail() {
+        self.emailCurriculum()
+        hideUnderNavBar(self)
+    }
+    @IBAction func previewPdf() {
+        self.printToPdf()
+        hideUnderNavBar(self)
+    }
+    @IBAction func addOrEdit() {
+        self.showAddYoursViewController()
+        hideUnderNavBar(self)
     }
     
-    @IBAction func loadCurriculum(sender: UIBarButtonItem? = nil) {
-        let mainBundle = NSBundle.mainBundle()
-//        var htmlString = ""
-//        if let indexURL = mainBundle.pathForResource("index-william", ofType: "html") {
-//            do {
-//                htmlString = try NSString(contentsOfFile: indexURL, encoding: NSUTF8StringEncoding) as String
-//            } catch {
-//                print("Couldn't parse index.html file")
+//    var omero = true {
+//        didSet {
+//            if omero {
+//                selectedTemplate = Templates.omero
 //            }
-//            webViewer.loadHTMLString(htmlString, baseURL: NSURL(fileURLWithPath: mainBundle.bundlePath))
+//            else {
+//                selectedTemplate = Templates.william
+//            }
 //        }
-
-        let htmlString = CvWebMaster.composeHtml(curriculumModel, withTemplate: selectedTemplate)
-        //print(htmlString) // Todo: take this out
-        webViewer.loadHTMLString(htmlString, baseURL: NSURL(fileURLWithPath: mainBundle.bundlePath))
+//    }
+    
+    @IBAction func chooseTemplate() {
+        hideUnderNavBar(self)
+//        omero = !omero
+//        loadCurriculum(curriculumModel)
+        if let templateVC = self.storyboard?.instantiateViewControllerWithIdentifier("ChooseTemplateVc") as? TemplateViewController {
+            templateVC.cv = curriculumModel
+            presentViewController(templateVC, animated: true, completion: nil)
+        }
+    }
+    
+    let showHideUnderNavBar = { (cVc: CurriculumViewController) -> () in
+        
+        cVc.menuIsCollapsed = !cVc.menuIsCollapsed
+        
+        UIView.animateWithDuration(0.4) { () -> Void in
+            cVc.underNavBarBottomLine.active = !cVc.underNavBarBottomLine.active
+            cVc.underNavBarTopLine.active = !cVc.underNavBarTopLine.active
+            cVc.view.layoutIfNeeded()
+        }
+    }
+    
+    let hideUnderNavBar = { (cVc: CurriculumViewController) -> () in
+        
+        cVc.menuIsCollapsed = true
+        
+        UIView.animateWithDuration(0.4) { () -> Void in
+            cVc.underNavBarTopLine.active = false
+            cVc.underNavBarBottomLine.active = true
+            cVc.view.layoutIfNeeded()
+        }
     }
 
+    @IBAction func action(sender: UIBarButtonItem) {
+        showHideUnderNavBar(self)
+    }
+    
+    @IBAction func loadCurriculum(cv: AnyObject) {
+        let mainBundle = NSBundle.mainBundle()
+        var curriculum = curriculumModel
+        if let cv = cv as? CurriculumVitae {
+            curriculum = cv
+        }
+        let htmlString = CvWebMaster.composeHtml(curriculum, template: selectedTemplate)
+//        print(htmlString)
+        let baseURL = NSURL(fileURLWithPath: mainBundle.bundlePath)
+     
+        webViewer.loadHTMLString(htmlString, baseURL: baseURL)
+        
+//        NSURLCache.sharedURLCache().removeAllCachedResponses()
+//        let filename = getDocumentsDirectory().stringByAppendingString("/cv.html")
+//        do {
+//            let success = try Bool(htmlString.writeToURL(NSURL(fileURLWithPath: filename), atomically: true, encoding: NSUTF8StringEncoding))
+//            print("\nCREATED? \(success)\n" + filename)
+//        } catch let err as NSError {
+//            print(err.localizedDescription)
+//        }
+//        let requ = NSURLRequest(URL: NSURL(fileURLWithPath: filename), cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
+//        webViewer.loadRequest(requ)
+        hideUnderNavBar(self)
+    }
+
+    func reloadDefault() {
+        loadCurriculum(CurriculumVitae())
+        curriculumModel = CurriculumVitae()
+    }
     
     func printToPdf() {
         let pdfFormatter = webViewer.viewPrintFormatter()
@@ -105,7 +160,7 @@ class CurriculumViewController: UIViewController, MFMailComposeViewControllerDel
         let pdfData = NSMutableData()
        
         UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil)
-        for var i = 0; i < pdfRenderer.numberOfPages(); i++ {
+        for i in 0 ..< pdfRenderer.numberOfPages() {
             UIGraphicsBeginPDFPageWithInfo(view.bounds, nil)
 //            print("outer rect: \n\(webViewer.bounds)")
 //            print("inner rect: \n\(UIGraphicsGetPDFContextBounds())")
@@ -123,9 +178,9 @@ class CurriculumViewController: UIViewController, MFMailComposeViewControllerDel
     
     func emailCurriculum() {
         if( MFMailComposeViewController.canSendMail() ) {
-            let htmlString = CvWebMaster.composeHtml(curriculumModel, withTemplate: selectedTemplate)
+            let htmlString = CvWebMaster.composeHtml(curriculumModel, template: selectedTemplate)
             let mailComposer = MFMailComposeViewController()
-            mailComposer.setSubject("Curriculm Vitae of \(curriculumModel.me.fullName)")
+            mailComposer.setSubject("Curriculum Vitae of \(curriculumModel.me.fullName)")
             mailComposer.setMessageBody(htmlString, isHTML: true)
             if var docURL = (NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)).last {
                 docURL = docURL.URLByAppendingPathComponent("fpcv.pdf")
@@ -145,7 +200,30 @@ class CurriculumViewController: UIViewController, MFMailComposeViewControllerDel
     }
     
     override func viewDidLoad() {
-        loadCurriculum()
+        webViewer.scrollView.delegate = self
+//        let navBar = navigationController!.navigationBar
+//        let navBarEndingY = navBar.frame.height + navBar.frame.origin.y
+        buttStylist(underNavBar)
+        
+        underNavBar.heightAnchor.constraintEqualToConstant(80).active = true
+        underNavBar.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
+        underNavBar.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
+       
+        underNavBarBottomLine = underNavBar.bottomAnchor.constraintEqualToAnchor(view.topAnchor)
+        underNavBarBottomLine.active = true
+        underNavBarTopLine = underNavBar.topAnchor.constraintEqualToAnchor(topLayoutGuide.bottomAnchor)
+        
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.4 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.underNavBar.hidden = false
+        }
+        
+        loadCurriculum(curriculumModel)
+
+        let tapSequence = UITapGestureRecognizer(target: self, action: #selector(CurriculumViewController.reloadDefault))
+            tapSequence.numberOfTapsRequired = 3
+            tapSequence.numberOfTouchesRequired = 2
+        view.addGestureRecognizer(tapSequence)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -170,12 +248,126 @@ class CurriculumViewController: UIViewController, MFMailComposeViewControllerDel
     func editorDidEndEditingCurriculum(curriculum: CurriculumVitae?, withStateDone state: Bool) {
         if let cv = curriculum where state { // is Done
             curriculumModel = cv
-            loadCurriculum()
+            saveProfileImageInMainBundle(cv.me.imageData)
+            loadCurriculum(curriculumModel)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         else { // Cancel
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
+    
+    func saveProfileImageInMainBundle(imgData:NSData?) {
+        if let data = imgData {
+            let filename = getDocumentsDirectory().stringByAppendingPathComponent("myProfilePicture.jpg")
+            do {
+                let deleted = try Bool(NSFileManager.defaultManager().removeItemAtPath(filename))
+                print("\nDELETED? \(deleted)\n" + filename)
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+            
+            let success = Bool(data.writeToFile(filename, atomically: true))
+            print("\nCREATED? \(success)\n" + filename)
+        }
+    }
+    
+     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 0 {
+//            print(scrollView.contentOffset.y)
+            scrollViewDidScrollToTop(scrollView)
+        }
+        else {
+            hideUnderNavBar(self)
+        }
+    }
+    
+    func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+        UIView.animateWithDuration(0.3) { () -> Void in
+            self.navigationController?.navigationBarHidden = false
+        }
+    }
+    
 }
 
+func getDocumentsDirectory() -> NSString
+{
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
+}
+
+func buttStylist(view:UIView) -> ()
+{
+    if let butt = view as? UIButton {
+//        butt.tintColor = UIColor(colorLiteralRed: 174 / 255.0,
+//                                 green: 0 / 255.0,
+//                                 blue: 4 / 255.0,
+//                                 alpha: 1)
+        butt.tintColor = UIColor.lightGrayColor()
+    }
+    else {
+        for v in view.subviews {
+            buttStylist(v)
+        }
+    }
+}
+
+func stylist(view:UIView) {
+    
+    let transparent = UIColor.whiteColor().colorWithAlphaComponent(0)
+    let shadow = UIColor.whiteColor().colorWithAlphaComponent(0.3)
+    let radius: CGFloat = 3
+    let borderWidth: CGFloat = 0.2
+//    UIColor.blueColor() //
+    if let textField = view as? UITextField {
+        textField.backgroundColor = shadow
+        textField.borderStyle = UITextBorderStyle.None
+        textField.layer.cornerRadius = radius
+        let h = textField.heightAnchor.constraintEqualToConstant(30)
+//            h.priority = 999
+            h.active = true
+    }
+    else if let textView = view as? UITextView {
+        textView.layer.backgroundColor = shadow.CGColor
+        textView.layer.borderWidth = 0
+        textView.layer.cornerRadius = radius
+    }
+    else if let header = view as? UITableViewHeaderFooterView {
+//        let parentRootView = rootSuperView(header)
+//        let bgColor = parentRootView.backgroundColor
+//        header.backgroundView?.backgroundColor = bgColor
+        header.backgroundView?.backgroundColor = transparent
+    }
+    else if let tableCell = view as? UITableViewCell {
+        tableCell.backgroundColor = transparent
+        tableCell.contentView.backgroundColor = transparent
+        tableCell.layer.cornerRadius = radius
+        tableCell.layer.borderWidth = borderWidth
+        for subV in tableCell.subviews {
+            stylist(subV)
+        }
+    }
+    else if let tableView = view as? UITableView {
+        tableView.backgroundColor = transparent
+        tableView.tintColor = transparent
+        for subV in tableView.subviews {
+            stylist(subV)
+        }
+    }
+    else {
+        for subV in view.subviews {
+            stylist(subV)
+        }
+    }
+}
+
+func rootSuperView(subview: UIView) -> UIView {
+    if subview.superview == nil {
+        return subview.subviews.first!
+    }
+    else {
+        return rootSuperView(subview.superview!)
+    }
+}

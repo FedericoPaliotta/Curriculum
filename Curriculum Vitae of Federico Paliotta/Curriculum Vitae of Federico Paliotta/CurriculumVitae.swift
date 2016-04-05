@@ -75,25 +75,25 @@ class CurriculumVitae : NSObject, NSCoding
         // MARK: Jobs
         jobs = [
             Job(employer: "Freelance iOS Developer and Solution Consultant",
-                title: "",
+                title: "iOS Developer",
                 since: "January 2013",
                 to: "Present",
                 duties: "Mainly iOS Developement",
-                specifications: ["Available on the major freelancers networks. ::link:: https://www.upwork.com :: Upwork :;, ::link:: http://www.freelance.com/ :: Freelance :;, ::link:: https://www.craigslist.org :: Craigslist :;"]),
+                specifications: ["Available on the major freelancers networks. ::link:: https://www.upwork.com :: Upwork :;, ::link:: http://www.freelance.com/ :: Freelance :;"]),
             Job(employer: "Hot Coffey Design llc",
                 title: "Software Developer",
                 since: "March 2015",
                 to: "October 2015",
-                duties: "iOS, Web, and Crossplatform Desktop Developement",
+                duties: "iOS, Web, and Crossplatform Desktop Development",
                 specifications: ["::link:: http://www.hotcoffeydesign.com/ :: H.C.D. :; is one of the most successful web and mobile design and development companies in the United States",
-                    "Endlessly elarged my knowledge of multiple aspects of developing by working with and learnig from top developers and designers, on many challenging projects",
+                    "Endlessly enlarged my knowledge of multiple aspects of developing by working with and learning from top developers and designers, on many challenging projects",
                     "Had a vast and precious experience on working closely with the clients, in an agile process of collecting the inputs and delivering a fine product"]),
             Job(employer: "Icona Management srl",
                 title: "Software Developer",
                 since: "February 2009",
                 to: "August 2010",
-                duties: "CMS (Alfresco) and Desktop Developement",
-                specifications: ["::link:: http://www.iconamanagement.com/ :: Icona :; provides enterprice buisness solutions and outsourcing services of IT support and systems management to many important ::link:: http://www.iconamanagement.com/index-2.html :: clients :; like ::link:: http://www.freshfields.com/en/italy/ :: Freshfields Bruckhaus Deringer :;, or ::link:: http://www.regione.lazio.it/ :: Regione Lazio :;",
+                duties: "CMS (Alfresco) and Desktop Development",
+                specifications: ["::link:: http://www.iconamanagement.com/ :: Icona :; provides enterprise business solutions and outsourcing services of IT support and systems management to many important ::link:: http://www.iconamanagement.com/index-2.html :: clients :; like ::link:: http://www.freshfields.com/en/italy/ :: Freshfields Bruckhaus Deringer :;, or ::link:: http://www.regione.lazio.it/ :: Regione Lazio :;",
                     "Started working in a helpdesk service delivered to a client and quickly switched into the development branch of the company",
                     "Took part in developing several projects in C#, Java, MySql and maintained different websites",
                     "Led a project of customizing an Open Source Content Management System, Alfresco, for one of the biggest company's clients"])]
@@ -130,11 +130,11 @@ class CurriculumVitae : NSObject, NSCoding
                            skills: ["Adobe CS", "Nikon ViewNX", "Light composition and photograpy",
                          "Good basic hardware knowledge", "Good knowledge in general Assembly concepts",
                          "Very good knowledge in general networking, dbms, and security concepts and practices",
-                         "Basic knowledge and familiarity with iOS reverse engineering concepts and practices"])]
+                         "Minimal knowledge with iOS reverse engineering concepts and practices"])]
         
        
         // MARK: Personal Profile
-        profile = "In just three words I'd say I'm a dreamer, an intense perfectionist, and a software engineer. Above all, I like to think of software developing as an art, and of myself, as a bit of an artist. My emphasis when developing is on elegance and clarity in implementation, decoupling and code reusability, robust architecture, and extensive testing on both funcionality and perfomance, especially regarding worst case scenarios. \n\n I graduated in \(education.last!.yearOfGraduation) from \(education.last!.istitute). After graduating with a \(education.last!.degree), I decided to leave Italy and start over in the heart of North America, the mid-west United States. \n Since working on my graduation thesis project, in which I embedded calls to C functions from a computer vision framework (OpenCV) into an iOS App through the usage of C/Objective-C custom bridging classes, I've become more interested in iOS development and, as the time goes by, increasingly knowledgeable as well. [::link:: https://github.com/FedericoPaliotta/Thesis-Project---Bonsai-Due.git :: Thesis Project in Italian :;] \n\n During my time in North America, I've been employed full time at ::link:: http://hotcoffeydesign.com :: Hot Coffey Design :;, one of the most successful web and mobile design and development companies in the continental US. While working at HCD I’ve largely improved my skills in UI design and the architectural aspects of developing, and gained experience in working closely with the client in order to meet the exact user experience desired."
+        profile = "In just three words I'd say I'm a dreamer, an intense perfectionist, and a software engineer. Above all, I like to think of software developing as an art, and of myself, as a bit of an artist. My emphasis when developing is on elegance and clarity in implementation, decoupling and code reusability, robust architecture, and extensive testing on both functionality and performance, especially regarding worst case scenarios. \n\n I graduated in \(education.last!.yearOfGraduation) from \(education.last!.istitute). After graduating with a \(education.last!.degree), I decided to leave Italy and start over in the heart of North America, the mid-west United States. \n Since working on my graduation thesis project, in which I embedded calls to C functions from a computer vision framework (OpenCV) into an iOS App through the usage of C/Objective-C custom bridging classes, I've become more interested in iOS development and, as the time goes by, increasingly knowledgeable as well. [::link:: https://github.com/FedericoPaliotta/Thesis-Project---Bonsai-Due.git :: Thesis Project in Italian :;] \n\n During my time in North America, I've been employed full time at ::link:: http://hotcoffeydesign.com :: Hot Coffey Design :;, one of the most successful web and mobile design and development companies in the continental US. While working at HCD I’ve largely improved my skills in UI design and the architectural aspects of developing, and gained experience in working closely with the client in order to meet the exact user experience desired."
 
         super.init()
     }
@@ -208,12 +208,12 @@ class CurriculumVitae : NSObject, NSCoding
 // A struct that serve to represent a Job in a CurriculumVitae istance.
 class Job : NSObject, NSCoding
 {
-    let employer: String!
-    let title: String!
-    let since: String!
-    let to: String!
-    let duties: String?
-    let specifications: [String]?
+    var employer: String!
+    var title: String!
+    var since: String!
+    var to: String!
+    var duties: String?
+    var specifications: [String]?
     
     required init(employer: String, title: String, since: String, to: String, duties: String, specifications: [String]) {
         self.employer = employer
@@ -263,20 +263,20 @@ class Job : NSObject, NSCoding
 // A struct that serve to represent an Ecucation in a CurriculumVitae istance.
 class Education : NSObject, NSCoding
 {
-    let istitute: String!
-    let degree: String!
-    let yearOfGraduation: Int!
-    let accademicCurriculum: String?
-    let thesis: String?
-    let advisor: String?
+    var istitute: String!
+    var degree: String!
+    var yearOfGraduation: Int!
+    var accademicCurriculum: String?
+    var thesis: String?
+    var advisor: String?
     
-    required init(istitute: String, degree: String, yearOfGraduation: Int, let accademicCurriculum: String?, thesis: String?, advisor: String?) {
+    required init(istitute: String, degree: String, yearOfGraduation: Int,  accademicCurriculum: String?, thesis: String?, advisor: String?) {
         self.istitute = istitute
         self.degree = degree
         self.yearOfGraduation = yearOfGraduation
         self.accademicCurriculum = accademicCurriculum
         self.thesis = thesis
-        self.advisor = thesis
+        self.advisor = advisor
         super.init()
     }
     
@@ -319,8 +319,8 @@ class Education : NSObject, NSCoding
 
 class SkillsSet : NSObject, NSCoding
 {
-    let level: SkillLevel!
-    let skills: [String]!
+    var level: SkillLevel!
+    var skills: [String]!
     
     required init(level: SkillLevel, skills: [String]) {
         self.level = level
@@ -353,8 +353,10 @@ class SkillsSet : NSObject, NSCoding
             descr += skill + ", "
         }
         var characters = descr.characters
-        characters.removeLast()
-        characters.removeLast()
+        if (characters.count > 1 ) {
+            characters.removeLast()
+            characters.removeLast()
+        }
         return String(characters)
     }
     
@@ -385,16 +387,37 @@ enum SkillLevel : CustomStringConvertible, Hashable {
     case SpokenLanguages(String)
     case Others(String)
     
+    static let allValues = [WellKnown, AlsoKnown, SpokenLanguages, Others]
+    
+    init?(_ numericLevel: Int, value: String?) {
+        let v = value ?? ""
+        switch numericLevel {
+        case 0: self = WellKnown(v)
+        case 1: self = AlsoKnown(v)
+        case 2: self = SpokenLanguages(v)
+        default: self = Others(v)
+        }
+    }
+    
     var description: String {
         switch self {
         case WellKnown(let associatedDescription):
             return associatedDescription
         case AlsoKnown(let associatedDescription):
             return associatedDescription
-        case .SpokenLanguages(let associatedDescription):
+        case SpokenLanguages(let associatedDescription):
             return associatedDescription
-        case .Others(let associatedDescription):
+        case Others(let associatedDescription):
             return associatedDescription
+        }
+    }
+    
+    var intValue: Int {
+        switch self {
+        case WellKnown: return 0
+        case AlsoKnown: return 1
+        case SpokenLanguages: return 2
+        case Others: return 3
         }
     }
     
@@ -408,6 +431,15 @@ enum SkillLevel : CustomStringConvertible, Hashable {
             return (2, associatedDescription)
         case .Others(let associatedDescription):
             return (3, associatedDescription)
+        }
+    }
+    
+    var shortDescr: String {
+        switch self {
+        case WellKnown: return "⭐︎⭐︎⭐︎⭐︎⭐︎"
+        case AlsoKnown: return "⭐︎⭐︎⭐︎"
+        case SpokenLanguages: return "⭐︎⭐︎"
+        case Others: return "⭐︎"
         }
     }
     
@@ -427,7 +459,7 @@ enum SkillLevel : CustomStringConvertible, Hashable {
     
     func isHigherThan(otherLevel: SkillLevel) -> Bool {
         var value = 0
-        var otherValue = value
+        var otherValue = 0
         switch self {
         case WellKnown: value = 100
         case AlsoKnown: value = 80
@@ -442,8 +474,6 @@ enum SkillLevel : CustomStringConvertible, Hashable {
         }
         return value > otherValue
     }
-    
-    
 }
 
 func == (left: SkillsSet, right: SkillsSet) -> Bool {

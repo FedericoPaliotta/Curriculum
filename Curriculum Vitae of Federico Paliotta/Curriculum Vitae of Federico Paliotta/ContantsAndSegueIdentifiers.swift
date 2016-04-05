@@ -21,12 +21,27 @@ struct CellIds {
     static let addEmail = "AddEmail"
     static let telephone = "Telephone"
     static let addTelephone = "AddTelephone"
+    static let job = "Job"
+    static let addJob = "AddJob"
+    static let jobSpec = "JobSpec"
+    static let addJobSpec = "AddJobSpec"
+    static let skill = "Skill"
+    static let addSkill = "AddSkill"
+    static let skillSet = "SkillSet"
+    static let addSkillSet = "AddSkillSet"
+    static let education = "Education"
+    static let addEducation = "AddEducation"
+    
+    static let templateView = "Templates"
+    static let templateCell = "Template Cell"
 }
 
 struct Tables {
     static let Addresses = "Addresses"
     static let Emails = "Emails"
     static let Telephones = "Telephones"
+    static let Jobs = "Jobs"
+    static let JobSpecs = "Job Specifications"
 }
 
 struct Constants {

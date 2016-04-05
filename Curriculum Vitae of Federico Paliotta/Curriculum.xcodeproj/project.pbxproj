@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B3E189C1C763CF2004E7B9C /* profilePicture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1B3E189B1C763CF2004E7B9C /* profilePicture.jpg */; };
+		1BA169DE1CB1DC0F00A4436A /* TemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA169DD1CB1DC0F00A4436A /* TemplateViewController.swift */; };
+		1BCFD4FF1CA2DC25005D95BD /* KeySkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFD4FE1CA2DC25005D95BD /* KeySkillsViewController.swift */; };
+		1BCFD5011CA2E3DC005D95BD /* EducationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFD5001CA2E3DC005D95BD /* EducationViewController.swift */; };
+		1BDB8D961C9B32DC000B1C47 /* profilePicture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1BDB8D951C9B32DC000B1C47 /* profilePicture.jpg */; };
 		860C162F1BEDC50F0097F33D /* index-william.html in Resources */ = {isa = PBXBuildFile; fileRef = 860C162E1BEDC50F0097F33D /* index-william.html */; };
 		862D314D1BEC4F7A00DA6F7C /* style-william.css in Resources */ = {isa = PBXBuildFile; fileRef = 862D314C1BEC4F7A00DA6F7C /* style-william.css */; };
 		863732FA1BF51EC500F53048 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863732F91BF51EC500F53048 /* ContactViewController.swift */; };
@@ -29,7 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1B3E189B1C763CF2004E7B9C /* profilePicture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = profilePicture.jpg; path = ../../../../../profilePicture.jpg; sourceTree = "<group>"; };
+		1BA169DD1CB1DC0F00A4436A /* TemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemplateViewController.swift; path = "Curriculum Vitae of Federico Paliotta/TemplateViewController.swift"; sourceTree = SOURCE_ROOT; };
+		1BCFD4FE1CA2DC25005D95BD /* KeySkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeySkillsViewController.swift; path = "Curriculum Vitae of Federico Paliotta/KeySkillsViewController.swift"; sourceTree = SOURCE_ROOT; };
+		1BCFD5001CA2E3DC005D95BD /* EducationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EducationViewController.swift; path = "Curriculum Vitae of Federico Paliotta/EducationViewController.swift"; sourceTree = SOURCE_ROOT; };
+		1BDB8D951C9B32DC000B1C47 /* profilePicture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = profilePicture.jpg; path = "Curriculum Vitae of Federico Paliotta/profilePicture.jpg"; sourceTree = SOURCE_ROOT; };
 		860C162E1BEDC50F0097F33D /* index-william.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "index-william.html"; path = "Curriculum Vitae of Federico Paliotta/index-william.html"; sourceTree = SOURCE_ROOT; };
 		862D314C1BEC4F7A00DA6F7C /* style-william.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "style-william.css"; path = "Curriculum Vitae of Federico Paliotta/style-william.css"; sourceTree = SOURCE_ROOT; };
 		863732F91BF51EC500F53048 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactViewController.swift; path = "Curriculum Vitae of Federico Paliotta/ContactViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -92,6 +98,9 @@
 				864C055E1BE7CC430010424D /* CvWebMaster.swift */,
 				866E89011BE9879500DDF947 /* ContantsAndSegueIdentifiers.swift */,
 				86DF952A1C0170F2000E1929 /* JobsViewController.swift */,
+				1BCFD4FE1CA2DC25005D95BD /* KeySkillsViewController.swift */,
+				1BCFD5001CA2E3DC005D95BD /* EducationViewController.swift */,
+				1BA169DD1CB1DC0F00A4436A /* TemplateViewController.swift */,
 				864C053E1BE5C7E30010424D /* Main.storyboard */,
 				864C053C1BE5C7E30010424D /* LaunchScreen.storyboard */,
 				86DF95281C010CED000E1929 /* Assets.xcassets */,
@@ -100,7 +109,7 @@
 				864C05441BE5C7E30010424D /* style-omero.css */,
 				862D314C1BEC4F7A00DA6F7C /* style-william.css */,
 				864C05431BE5C7E30010424D /* myProfilePicture.jpg */,
-				1B3E189B1C763CF2004E7B9C /* profilePicture.jpg */,
+				1BDB8D951C9B32DC000B1C47 /* profilePicture.jpg */,
 				864C05421BE5C7E30010424D /* Info.plist */,
 			);
 			path = Curriculum;
@@ -175,7 +184,7 @@
 				864C055C1BE5C7E30010424D /* style-omero.css in Resources */,
 				864C05571BE5C7E30010424D /* Main.storyboard in Resources */,
 				86DF95291C010CED000E1929 /* Assets.xcassets in Resources */,
-				1B3E189C1C763CF2004E7B9C /* profilePicture.jpg in Resources */,
+				1BDB8D961C9B32DC000B1C47 /* profilePicture.jpg in Resources */,
 				864C05591BE5C7E30010424D /* index-omero.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,14 +197,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				86A345A91BEEFC620050257D /* AddYoursTabBarViewController.swift in Sources */,
+				1BCFD4FF1CA2DC25005D95BD /* KeySkillsViewController.swift in Sources */,
 				866E89021BE9879500DDF947 /* ContantsAndSegueIdentifiers.swift in Sources */,
 				864C055F1BE7CC430010424D /* CvWebMaster.swift in Sources */,
 				864C055D1BE5C7E30010424D /* CurriculumViewController.swift in Sources */,
 				864C05581BE5C7E30010424D /* CurriculumVitae.swift in Sources */,
 				863732FA1BF51EC500F53048 /* ContactViewController.swift in Sources */,
+				1BCFD5011CA2E3DC005D95BD /* EducationViewController.swift in Sources */,
 				863732FC1BF5CF2D00F53048 /* ProfileViewController.swift in Sources */,
 				864C05461BE5C7E30010424D /* AppDelegate.swift in Sources */,
 				86DF952B1C0170F2000E1929 /* JobsViewController.swift in Sources */,
+				1BA169DE1CB1DC0F00A4436A /* TemplateViewController.swift in Sources */,
 				869E68FC1BF2EC9F00C843F8 /* CustomCellClasses.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

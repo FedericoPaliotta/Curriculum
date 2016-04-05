@@ -270,6 +270,11 @@ h2.sectionContent.experience {
         -webkit-column-count:2;
         column-count:2;
     }
+    
+    .subDetails {
+        float: none;
+        font-size: .77em;
+    }
 }
 
 @media all and (max-width: 480px) {

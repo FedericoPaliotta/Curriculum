@@ -13,35 +13,50 @@ import Contacts
 struct CvWebMaster {
     static var htmlDeclaration = HtmlTagGenerator.doctype
     
-    static func composeHtml(cv: CurriculumVitae, withTemplate: String?) -> String {
+    static func composeHtml(cv: CurriculumVitae, template: String) -> String {
         var htmlCode = htmlDeclaration
         
         // MARK: Page header
         
         let docTitle = HtmlTagGenerator.title("\(cv.me != nil ? cv.me!.fullName : "" ) - Curriculum Vitae")
-        let metadata =
+        let me =
             "<meta name=\"viewport\" content=\"width=device-width\"/> \n" +
-            "<meta name=\"description\" content=\"The Curriculum Vitae of Federico Paliotta.\"/> \n" +
-            "<meta charset=\"UTF-8\"> \n" +
-            "<link type=\"text/css\" rel=\"stylesheet\" href=\"\(withTemplate ?? Templates.defaultStyle).css\"> \n" +
+            "<meta name=\"description\" content=\"The Curriculum Vitae of Federico Paliotta.\"/> \n"
+        let ta =
+            "<meta charset=\"UTF-8\"> \n"
+        let cssFile = "   -+=*!INJECT_CSS_HERE!*=+-   "
+        let da = HtmlTagGenerator.style(cssFile)
+//            "<link type=\"text/css\" rel=\"stylesheet\" href=\"\(withTemplate ?? Templates.defaultStyle).css\"> \n"
+        let ti =
             "<link type=\"text/css\" rel=\"stylesheet\" href=\"http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300\"> \n"
+        
+        
+        let metadata = me + ta + da + ti 
+        
         let pageHeader = HtmlTagGenerator.head(docTitle + metadata)
         
         htmlCode += pageHeader
 
         
         
-        
         // MARK: Page body
         
         
         // MARK: --- Main Details
-        let headShotImg = HtmlTagGenerator.img("myProfilePicture.jpg", alt: cv.me != nil ? cv.me!.fullName : "" ) /// TODO: make this not hard-coded !!!
-        let headShotDiv = HtmlTagGenerator.div(headShotImg, id: "headshot", `class`: "quickFade")
+        var imgPath = ""
+        
+        if isTheDefaultModel {
+            imgPath = "myProfilePicture.jpg"
+        }
+        else {
+            imgPath = getDocumentsDirectory().stringByAppendingPathComponent("myProfilePicture.jpg")
+        }
+        let headShotImg = HtmlTagGenerator.img(imgPath, alt: cv.me != nil ? cv.me!.fullName : "" )
+        let headShotDiv = HtmlTagGenerator.div(headShotImg, id: "headshot", cssClass: "quickFade")
         
         // Main Details Composition
-        let name    = HtmlTagGenerator.h(1, content: cv.me != nil ? cv.me!.fullName : "" , `class`: "quickFade delayTwo")
-        let title   = HtmlTagGenerator.h(2, content: cv.title ?? "", `class`: "quickFade delayThree")
+        let name    = HtmlTagGenerator.h(1, content: cv.me != nil ? cv.me!.fullName : "" , cssClass: "quickFade delayTwo")
+        let title   = HtmlTagGenerator.h(2, content: cv.title ?? "", cssClass: "quickFade delayThree")
         let nameDiv = HtmlTagGenerator.div(name + title, id: "name")
         
         let emailAddress = cv.me?.emailAddresses.first?.value as? String ?? ""
@@ -63,12 +78,12 @@ struct CvWebMaster {
         }
         
         let contactDetails = HtmlTagGenerator.ul(listContent)
-        let contactDetailsDiv = HtmlTagGenerator.div(contactDetails, id: "contactDetails", `class`: "quickFade delayFour")
+        let contactDetailsDiv = HtmlTagGenerator.div(contactDetails, id: "contactDetails", cssClass: "quickFade delayFour")
         
-        let clearDiv = HtmlTagGenerator.div("", `class`:"clear")
+        let clearDiv = HtmlTagGenerator.div("", cssClass:"clear")
         
         let mainDetails = headShotDiv + nameDiv + contactDetailsDiv + clearDiv
-        let mainDetailsDiv = HtmlTagGenerator.div(mainDetails, `class`: "mainDetails")
+        let mainDetailsDiv = HtmlTagGenerator.div(mainDetails, cssClass: "mainDetails")
         
         
  
@@ -79,10 +94,10 @@ struct CvWebMaster {
         var sectionPersonalProfile = ""
         if let profile = cv.profile {
             let sectionTitle1 = HtmlTagGenerator.h(1, content: "Personal Profile")
-            let sectionTitleDiv1 = HtmlTagGenerator.div(sectionTitle1, `class`: "sectionTitle")
+            let sectionTitleDiv1 = HtmlTagGenerator.div(sectionTitle1, cssClass: "sectionTitle")
             var sectionContent1 = profile
                 sectionContent1 = formatParagraphText(sectionContent1)
-            let sectionContentDiv1 = HtmlTagGenerator.div(sectionContent1, `class`: "sectionContent")
+            let sectionContentDiv1 = HtmlTagGenerator.div(sectionContent1, cssClass: "sectionContent")
             let profileArticleContent = sectionTitleDiv1 + sectionContentDiv1
             let profileArticle = HtmlTagGenerator.article(profileArticleContent)
             let section1Content = profileArticle + clearDiv
@@ -91,17 +106,17 @@ struct CvWebMaster {
         
 
         // MARK: --- --- Section Profssional Experience
-        let sectionTitle2 = HtmlTagGenerator.h(1, content: "Profssional Experience")
-        let sectionTitleDiv2 = HtmlTagGenerator.div(sectionTitle2, `class`: "sectionTitle")
+        let sectionTitle2 = HtmlTagGenerator.h(1, content: "Professional Experience")
+        let sectionTitleDiv2 = HtmlTagGenerator.div(sectionTitle2, cssClass: "sectionTitle")
         
         var sectionContent2 = ""
-        for (var i=0; i < cv.jobs?.count ?? 0; i++) {
+        for i in 0 ..< (cv.jobs?.count ?? 0) {
             var jobArticle = HtmlTagGenerator.h(2, content: cv.jobs[i].employer) +
-                             HtmlTagGenerator.p("\(cv.jobs[i].since) - \(cv.jobs[i].to)", `class`: "subDetails")
+                             HtmlTagGenerator.p("\(cv.jobs[i].since) - \(cv.jobs[i].to)", cssClass: "subDetails")
             let duties = cv.jobs[i].duties
             if let specs = cv.jobs[i].specifications where specs.count > 0 {
                 jobArticle += "\(duties != nil ? HtmlTagGenerator.h(3, content: duties!) + "\n" : "")" +
-                              HtmlTagGenerator.ul(specs, `class`: "jobSpecifics")
+                              HtmlTagGenerator.ul(specs, cssClass: "jobSpecifics")
             } else if duties != nil {
                 jobArticle += HtmlTagGenerator.p(duties!)
             } else {
@@ -109,7 +124,7 @@ struct CvWebMaster {
             }
             sectionContent2 += jobArticle
         }
-        let sectionContentDiv2 = HtmlTagGenerator.div(sectionContent2, `class`: "sectionContent")
+        let sectionContentDiv2 = HtmlTagGenerator.div(sectionContent2, cssClass: "sectionContent")
         
         let section2Content = sectionTitleDiv2 + sectionContentDiv2 + clearDiv
         let sectionProfessionalExperience  = HtmlTagGenerator.section(section2Content)
@@ -117,7 +132,7 @@ struct CvWebMaster {
 
         // MARK: --- --- Section Key Skills
         let sectionTitle3 = HtmlTagGenerator.h(1, content: "Key Skills")
-        let sectionTitleDiv3 = HtmlTagGenerator.div(sectionTitle3, `class`: "sectionTitle")
+        let sectionTitleDiv3 = HtmlTagGenerator.div(sectionTitle3, cssClass: "sectionTitle")
         
         var sectionContent3 = ""
         
@@ -128,7 +143,7 @@ struct CvWebMaster {
         var secondSkillsSet = ""
         var thirdSkillsSet = ""
         var fourthSkillsSet = ""
-        if let template = withTemplate {
+//        if let template = withTemplate {
             switch template {
             case Templates.william:
                 firstSkillsSet = HtmlTagGenerator.h(2, content: skills?[0].level.description ?? "") +
@@ -144,22 +159,30 @@ struct CvWebMaster {
             case Templates.omero:
                 // This is the default template's configuration of the Key Skills Section
                 fallthrough
-            default: ""
+            default:
                 // If the template passed doesn't really exist, then use the default template's configuration
-                firstSkillsSet = HtmlTagGenerator.h(2, content: skills?[0].level.description ?? "") +
-                "\(skills?[0].skills != nil ? HtmlTagGenerator.ul((skills?[0].skills)!, `class`: "keySkills") : "" )"
-                secondSkillsSet = HtmlTagGenerator.h(2, content: skills?[1].level.description ?? "") +
-                "\(skills?[1].skills != nil ? HtmlTagGenerator.ul((skills?[1].skills)!, `class`: "keySkills") : "" )"
-                thirdSkillsSet = HtmlTagGenerator.h(2, content: skills?[2].level.description ?? "") +
-                "\(skills?[2].skills != nil ? HtmlTagGenerator.ul((skills?[2].skills)!, `class`: "keySkills") : "" )"
-                fourthSkillsSet = HtmlTagGenerator.h(2, content: skills?[3].level.description ?? "") +
-                "\(skills?[3].skills != nil ? HtmlTagGenerator.ul((skills?[3].skills)!, `class`: "keySkills") : "" )"
-
+                if skills?.count > 0 {
+                    firstSkillsSet = HtmlTagGenerator.h(2, content: skills?[0].level.description ?? "") +
+                    "\(skills?[0].skills != nil ? HtmlTagGenerator.ul((skills?[0].skills)!, cssClass: "keySkills") : "" )"
+                }
+                if skills?.count > 1 {
+                    secondSkillsSet = HtmlTagGenerator.h(2, content: skills?[1].level.description ?? "") +
+                    "\(skills?[1].skills != nil ? HtmlTagGenerator.ul((skills?[1].skills)!, cssClass: "keySkills") : "" )"
+                }
+                if skills?.count > 2 {
+                    thirdSkillsSet = HtmlTagGenerator.h(2, content: skills?[2].level.description ?? "") +
+                    "\(skills?[2].skills != nil ? HtmlTagGenerator.ul((skills?[2].skills)!, cssClass: "keySkills") : "" )"
+                }
+                if skills?.count > 3 {
+                    fourthSkillsSet = HtmlTagGenerator.h(2, content: skills?[3].level.description ?? "") +
+                    "\(skills?[3].skills != nil ? HtmlTagGenerator.ul((skills?[3].skills)!, cssClass: "keySkills") : "" )"
+                }
+                
                 sectionContent3 = firstSkillsSet + secondSkillsSet + thirdSkillsSet + fourthSkillsSet
             }
-        }
+//        }
         
-        let sectionContentDiv3 = HtmlTagGenerator.div(sectionContent3, `class`: "sectionContent")
+        let sectionContentDiv3 = HtmlTagGenerator.div(sectionContent3, cssClass: "sectionContent")
         
         let section3Content = sectionTitleDiv3 + sectionContentDiv3 + clearDiv
         let sectionKeySkills  = HtmlTagGenerator.section(section3Content)
@@ -168,13 +191,13 @@ struct CvWebMaster {
         // MARK: --- --- Section Education
         let highestEducation = cv.education?.last
         let sectionTitle4 = HtmlTagGenerator.h(1, content: "Education")
-        let sectionTitleDiv4 = HtmlTagGenerator.div(sectionTitle4, `class`: "sectionTitle")
+        let sectionTitleDiv4 = HtmlTagGenerator.div(sectionTitle4, cssClass: "sectionTitle")
         let educationArticleTitle = HtmlTagGenerator.h(2, content: highestEducation != nil ? highestEducation!.istitute : "" )
-        let educationArticleSubtitle = HtmlTagGenerator.p(highestEducation != nil ? "\(highestEducation!.degree), YR \(highestEducation!.yearOfGraduation)." : "", `class`: "subDetails")
+        let educationArticleSubtitle = HtmlTagGenerator.p(highestEducation != nil ? "\(highestEducation!.degree), YR \(highestEducation!.yearOfGraduation)." : "", cssClass: "subDetails")
         let educationArticleContent = HtmlTagGenerator.p(formatParagraphText((highestEducation?.accademicCurriculum) ?? ""))
         let educationArticle = educationArticleTitle + educationArticleSubtitle + educationArticleContent
         let sectionContent4 = HtmlTagGenerator.article(educationArticle)
-        let sectionContentDiv4 = HtmlTagGenerator.div(sectionContent4, `class`: "sectionContent")
+        let sectionContentDiv4 = HtmlTagGenerator.div(sectionContent4, cssClass: "sectionContent")
         let section4Content = sectionTitleDiv4 + sectionContentDiv4 + clearDiv
         let sectionEducation  = HtmlTagGenerator.section(section4Content)
         
@@ -182,7 +205,7 @@ struct CvWebMaster {
         // Main Area Composition
         var mainAreaContent = ""
         // If any template's name is passed
-        if let template = withTemplate {
+//        if let template = withTemplate {
             switch template {
             case Templates.william:
                 mainAreaContent = sectionProfessionalExperience  + sectionKeySkills + sectionEducation
@@ -193,25 +216,31 @@ struct CvWebMaster {
                 // If the template passed doesn't really exist, then use the default template's configuration
                 mainAreaContent = sectionPersonalProfile + sectionProfessionalExperience  + sectionKeySkills  + sectionEducation
             }
-        }
-        let mainAreaDiv = HtmlTagGenerator.div(mainAreaContent, id: "mainArea", `class`: "quickFade delayFive")
+//        }
+        let mainAreaDiv = HtmlTagGenerator.div(mainAreaContent, id: "mainArea", cssClass: "quickFade delayFive")
         
         
         // Main Content Composition
         let mainContent = mainDetailsDiv + mainAreaDiv
-        let mainDiv = HtmlTagGenerator.div(mainContent, id: "cv", `class`: "instaFade")
+        let mainDiv = HtmlTagGenerator.div(mainContent, id: "cv", cssClass: "instaFade")
         let body = HtmlTagGenerator.body(mainDiv, id: "top")
         let html = HtmlTagGenerator.html(body)
         htmlCode += html
         
         // MARK: Return the "well formatted" Html Code to display in the Curriculum Web View
-        return estractAndReplaceLinkWithHtmlFormat(
+        let wellFormated = estractAndReplaceLinkWithHtmlFormat(
             from: htmlCode.stringByReplacingOccurrencesOfString("&",
                 withString: "&amp;",
                 options: .LiteralSearch),
             startingWithMarker: "::link:: ",
             separatedBy: " :: ",
             terminatedWith: " :;")
+        let style = pasteStyleForTemplate(template)
+        return injectStyle(style, inHtml:wellFormated)
+    }
+    
+    static func injectStyle(style:String, inHtml:String) -> String {
+        return inHtml.stringByReplacingOccurrencesOfString("   -+=*!INJECT_CSS_HERE!*=+-   ", withString: style)
     }
     
     static func estractAndReplaceLinkWithHtmlFormat(from string: String, startingWithMarker: String, separatedBy: String, terminatedWith: String) -> String {
@@ -257,6 +286,20 @@ struct CvWebMaster {
         }
         return returnText
     }
+    
+    
+    static func pasteStyleForTemplate(template:String) -> String {
+        let mainBundle = NSBundle.mainBundle()
+        let filename = mainBundle.pathForResource(template, ofType: "css")
+        do {
+            let css = try String(contentsOfFile: filename!, encoding: NSUTF8StringEncoding)
+            //print(css)
+            return css
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            return ""
+        }
+    }
 }
 
 
@@ -267,60 +310,64 @@ private struct HtmlTagGenerator
 {
     static let doctype = "<!DOCTYPE html>\n"
     
-    static func html (content: String, id: String? = nil, `class`: String? = nil) -> String {
-        return "<html\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\n\(content)\n</html>\n"
+    static func html (content: String, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<html\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\n\(content)\n</html>\n"
     }
     
-    static func body (content: String, id: String? = nil, `class`: String? = nil) -> String {
-        return "<body\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\n\(content)\n</body>\n"
+    static func body (content: String, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<body\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\n\(content)\n</body>\n"
     }
     
-    static func head (content: String, id: String? = nil, `class`: String? = nil) -> String {
-        return "<head\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\n\(content)\n</head>\n"
+    static func head (content: String, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<head\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\n\(content)\n</head>\n"
     }
     
-    static func title (content: String, id: String? = nil, `class`: String? = nil) -> String {
-        return "<title\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\(content)</title>\n"
+    static func title (content: String, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<title\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\(content)</title>\n"
     }
     
-    static func h (level: Int, content: String, id: String? = nil, `class`: String? = nil) -> String {
-        return "<h\(level)\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\(content)</h\(level)>\n"
+    static func style (content: String) -> String {
+        return "<style>\(content)</style>\n"
     }
     
-    static func a (href: String, anchorText: String, inLine: Bool = false, target: String? = nil, id: String? = nil, `class`: String? = nil) -> String {
-        return "<a href=\"\(href)\"\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")\(target != nil ? " target=\"" + target! + "\"" : "")>\(anchorText)</a>\(inLine ? "" : "\n")"
+    static func h (level: Int, content: String, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<h\(level)\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\(content)</h\(level)>\n"
     }
     
-    static func img (src: String, alt: String? = nil, id: String? = nil, `class`: String? = nil) -> String {
-        return "<img\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! : "") src=\"\(src)\"\(alt != nil ? " alt=\"" + alt! + "\"" : "")/>\n"
+    static func a (href: String, anchorText: String, inLine: Bool = false, target: String? = nil, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<a href=\"\(href)\"\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")\(target != nil ? " target=\"" + target! + "\"" : "")>\(anchorText)</a>\(inLine ? "" : "\n")"
     }
     
-    static func p (content: String, id: String? = nil, `class`: String? = nil) -> String {
-        return "<p\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\n\(content)\n</p>\n"
+    static func img (src: String, alt: String? = nil, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<img\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! : "") src=\"\(src)\"\(alt != nil ? " alt=\"" + alt! + "\"" : "")/>\n"
     }
     
-    static func div (content: String, id: String? = nil, `class`: String? = nil) -> String {
-        return "<div\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\(content != "" ? "\n" + content + "\n" : "")</div>\n"
+    static func p (content: String, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<p\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\n\(content)\n</p>\n"
     }
     
-    static func section (content: String, id: String? = nil, `class`: String? = nil) -> String {
-        return "<section\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\n\(content)\n</section>\n"
+    static func div (content: String, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<div\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\(content != "" ? "\n" + content + "\n" : "")</div>\n"
     }
     
-    static func article (content: String, id: String? = nil, `class`: String? = nil) -> String {
-        return "<article\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\n\(content)\n</article>\n"
+    static func section (content: String, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<section\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\n\(content)\n</section>\n"
     }
     
-    static func ul (content: String, id: String? = nil, `class`: String? = nil) -> String {
-        return "<ul\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\n\(content)\n</ul>\n"
+    static func article (content: String, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<article\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\n\(content)\n</article>\n"
     }
     
-    static func li (content: String, bullets: Bool = false, id: String? = nil, `class`: String? = nil) -> String {
-        return "<li\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\(bullets ? "∙" : "")\(content)</li>\n"
+    static func ul (content: String, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<ul\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\n\(content)\n</ul>\n"
+    }
+    
+    static func li (content: String, bullets: Bool = false, id: String? = nil, cssClass: String? = nil) -> String {
+        return "<li\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\(bullets ? "∙" : "")\(content)</li>\n"
     }
 
-    static func ul (content: [String], bullets: Bool = false, id: String? = nil, `class`: String? = nil) -> String {
-        var returnValue = "<ul\(id != nil ? " id=\"" + id! + "\"" : "")\(`class` != nil ? " class=\"" + `class`! + "\"" : "")>\n"
+    static func ul (content: [String], bullets: Bool = false, id: String? = nil, cssClass: String? = nil) -> String {
+        var returnValue = "<ul\(id != nil ? " id=\"" + id! + "\"" : "")\(cssClass != nil ? " class=\"" + cssClass! + "\"" : "")>\n"
         for li in content {
             returnValue += self.li(li, bullets: bullets)
         }

@@ -179,10 +179,11 @@ section a {
 
 
 @media all and (min-width: 602px) and (max-width: 800px) {
-    #headshot {
+    /*
+    headshot {
         display: none;
     }
-    
+    */
     .keySkills {
         -moz-column-count:2;
         -webkit-column-count:2;
@@ -200,7 +201,7 @@ section a {
     #headshot {
         display: none;
     }
-    
+  
     #name, #contactDetails {
         float: none;
         width: 100%;

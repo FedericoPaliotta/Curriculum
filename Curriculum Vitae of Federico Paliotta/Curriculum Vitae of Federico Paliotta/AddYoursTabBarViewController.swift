@@ -17,8 +17,10 @@ protocol CurriculumEditorDelegate
 }
 
 
-class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UITextViewDelegate
+class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UITextViewDelegate, UINavigationBarDelegate
 {
+    
+    var curriculumEditorDelegate: CurriculumEditorDelegate?
     
     var curriculumToSave: CurriculumVitae!
 //        { didSet { print("I GOT SET") } }
@@ -28,7 +30,12 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
     var curriculumTitle: String?
     var curriculumProfile: String?
 
-    var curriculumEditorDelegate: CurriculumEditorDelegate?
+    var curriculumJobs: [Job]?
+    
+    var curriculumSkills: [SkillsSet]?
+    
+    var curriculumEdus: [Education]?
+    
     
     @IBOutlet weak var cvTabBar: UITabBar! {
         didSet {
@@ -41,8 +48,10 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
     
     
     func done() {
-        let cv = CurriculumVitae(me: contact, title: curriculumTitle, profile: curriculumProfile,
-                                 jobs: nil, education: nil, skills: nil)
+        let cv = CurriculumVitae(me: contact, title: curriculumTitle,
+            profile: curriculumProfile, jobs: curriculumJobs,
+            education: curriculumEdus, skills: curriculumSkills)
+        
         curriculumEditorDelegate?.editorDidEndEditingCurriculum(cv, withStateDone: true)
     }
     
@@ -66,18 +75,45 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        jobs = CurriculumVitae().jobs
+        
         if let tabs = viewControllers {
             for tab in tabs {
                 switch tab {
                 case is ContactViewController:
                     let contactCv = tab as! ContactViewController
                         contactCv.contactToSave = curriculumToSave?.me
+                        stylist(contactCv.view)
+                        contactCv.viewWillDisappear(false)
                 case is ProfileViewController:
                     let profileCv = tab as! ProfileViewController
                         profileCv.cvTitle = curriculumToSave?.title
                         profileCv.profile = curriculumToSave?.profile
+                        stylist(profileCv.view)
+                        profileCv.viewWillDisappear(false)
                 case is JobsViewController:
-                    selectedViewController = tab as! JobsViewController
+                    let jobCv = tab as! JobsViewController
+                    if let jobs = curriculumToSave?.jobs {
+                        jobCv.jobExperiences = jobs
+                    }
+                    stylist(jobCv.view)
+                    selectedViewController = jobCv
+                    // jobCv.viewWillDisappear(true) not necessary,
+                    // since the view appears by default.
+                case is KeySkillsViewController:
+                    let keySkillCv = tab as! KeySkillsViewController
+                    if let keySkills = curriculumToSave?.skills {
+                        keySkillCv.keySkills = keySkills
+                        stylist(keySkillCv.view)
+                        keySkillCv.viewWillDisappear(false)
+                    }
+                case is EducationViewController:
+                    let educationCv = tab as! EducationViewController
+                    if let educations = curriculumToSave?.education {
+                        educationCv.educs = educations
+                        stylist(educationCv.view)
+                        educationCv.viewWillDisappear(false)
+                    }
                 default: continue
                 }
             }
@@ -126,8 +162,8 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
     }
     
     func registerKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddYoursTabBarViewController.keyboardDidShow(_:)), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddYoursTabBarViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func unregisterKeyboardNotifications() {
@@ -154,4 +190,10 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
         scrollView?.scrollIndicatorInsets = UIEdgeInsetsZero
     }
   
+    
+    // MARK: UINavigationBarDelegate
+    
+    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
+        return .TopAttached
+    }
 }

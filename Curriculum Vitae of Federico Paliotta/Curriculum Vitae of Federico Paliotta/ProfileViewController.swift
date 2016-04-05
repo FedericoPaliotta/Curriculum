@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     var cvTitle: String!
     @IBOutlet weak var curriculumTitle: UITextField!
@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
     var profile: String!
     @IBOutlet weak var personalProfile: UITextView!
     
+    @IBOutlet weak var navBar: UINavigationBar!
     
     @IBAction func done(sender: AnyObject) {
         view.endEditing(true)
@@ -35,6 +36,11 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let addYoursTabBarVc = tabBarController as? AddYoursTabBarViewController {
+            navBar.delegate = addYoursTabBarVc
+        }
+        curriculumTitle.delegate = self
+        personalProfile.delegate = self
         curriculumTitle.text = cvTitle
         personalProfile.text = profile
     }
@@ -42,8 +48,30 @@ class ProfileViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         if let addEditTabBarController = tabBarController as? AddYoursTabBarViewController {
-            addEditTabBarController.curriculumTitle = curriculumTitle.text
-            addEditTabBarController.curriculumProfile = personalProfile.text
+            addEditTabBarController.curriculumTitle = cvTitle
+            addEditTabBarController.curriculumProfile = profile
         }
+    }
+    
+    // MARK: UITextFieldDelegate methods
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if let addEditTabBarController = tabBarController as? AddYoursTabBarViewController {
+            addEditTabBarController.textFieldDidBeginEditing(textField)
+        }
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        if let addEditTabBarController = tabBarController as? AddYoursTabBarViewController {
+            addEditTabBarController.textViewDidBeginEditing(textView)
+        }
+    }
+    
+    func textFieldDidEndEditing(textFild: UITextField) {
+        cvTitle = curriculumTitle.text ?? cvTitle
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        profile = personalProfile.text ?? profile
     }
 }
