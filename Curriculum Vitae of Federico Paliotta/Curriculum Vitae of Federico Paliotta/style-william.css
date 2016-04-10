@@ -120,11 +120,16 @@ section:last-child {
 
 section a {
     text-decoration: none;
-    color: #222;
+    color: #18236B;
 }
 
 section a:hover {
     color: #6978DE;
+}
+
+#cvTitle a {
+    color: #18236B;
+    text-decoration:none;
 }
 
 .sectionTitle {

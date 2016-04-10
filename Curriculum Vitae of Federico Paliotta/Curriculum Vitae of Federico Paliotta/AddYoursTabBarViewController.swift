@@ -28,6 +28,9 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
     var contact: CNContact?
     
     var curriculumTitle: String?
+    
+    var curriculumBlog: String?
+    
     var curriculumProfile: String?
 
     var curriculumJobs: [Job]?
@@ -48,7 +51,8 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
     
     
     func done() {
-        let cv = CurriculumVitae(me: contact, title: curriculumTitle,
+        let cv = CurriculumVitae(me: contact,
+            title: curriculumTitle, blog: curriculumBlog,
             profile: curriculumProfile, jobs: curriculumJobs,
             education: curriculumEdus, skills: curriculumSkills)
         
@@ -83,20 +87,21 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
                 case is ContactViewController:
                     let contactCv = tab as! ContactViewController
                         contactCv.contactToSave = curriculumToSave?.me
-                        stylist(contactCv.view)
+//                        stylist(contactCv.view)
                         contactCv.viewWillDisappear(false)
                 case is ProfileViewController:
                     let profileCv = tab as! ProfileViewController
                         profileCv.cvTitle = curriculumToSave?.title
+                        profileCv.cvBlog = curriculumToSave?.blog
                         profileCv.profile = curriculumToSave?.profile
-                        stylist(profileCv.view)
+//                        stylist(profileCv.view)
                         profileCv.viewWillDisappear(false)
                 case is JobsViewController:
                     let jobCv = tab as! JobsViewController
                     if let jobs = curriculumToSave?.jobs {
                         jobCv.jobExperiences = jobs
                     }
-                    stylist(jobCv.view)
+//                    stylist(jobCv.view)
                     selectedViewController = jobCv
                     // jobCv.viewWillDisappear(true) not necessary,
                     // since the view appears by default.
@@ -104,14 +109,14 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
                     let keySkillCv = tab as! KeySkillsViewController
                     if let keySkills = curriculumToSave?.skills {
                         keySkillCv.keySkills = keySkills
-                        stylist(keySkillCv.view)
+//                        stylist(keySkillCv.view)
                         keySkillCv.viewWillDisappear(false)
                     }
                 case is EducationViewController:
                     let educationCv = tab as! EducationViewController
                     if let educations = curriculumToSave?.education {
                         educationCv.educs = educations
-                        stylist(educationCv.view)
+//                        stylist(educationCv.view)
                         educationCv.viewWillDisappear(false)
                     }
                 default: continue
@@ -140,16 +145,16 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
     
     func textFieldDidBeginEditing(textField: UITextField) {
         if let mainWindow = UIApplication.sharedApplication().keyWindow {
-            let pointInWindowCoords = mainWindow.convertPoint(textField.frame.origin, fromView: textField.superview)
-            activeInputOrigin = scrollView?.convertPoint(pointInWindowCoords, fromView: mainWindow)
+            let textFieldBeginPoint = CGPoint(x: textField.frame.origin.x, y: textField.frame.origin.y)
+            let pointInWindowCoords = mainWindow.convertPoint(textFieldBeginPoint, fromView: textField.superview)
+            activeInputOrigin = pointInWindowCoords //scrollView?.convertPoint(pointInWindowCoords, fromView: mainWindow)
         }
     }
-    // TODO: fix on landscape, the scrolling point is calculated wrong!
     func textViewDidBeginEditing(textView: UITextView) {
-        let textViewEndPoint = CGPoint(x: textView.frame.origin.x, y: textView.frame.origin.y + textView.frame.height)
+        let textViewBeginPoint = CGPoint(x: textView.frame.origin.x, y: textView.frame.origin.y)
         if let mainWindow = UIApplication.sharedApplication().keyWindow {
-            let pointInWindowCoords = mainWindow.convertPoint(textViewEndPoint, fromView: textView.superview)
-            activeInputOrigin = scrollView?.convertPoint(pointInWindowCoords, fromView: mainWindow)
+            let pointInWindowCoords = mainWindow.convertPoint(textViewBeginPoint, fromView: textView.superview)
+            activeInputOrigin = pointInWindowCoords // scrollView?.convertPoint(pointInWindowCoords, toView: mainWindow.subviews.first)
         }
     }
     
@@ -176,11 +181,11 @@ class AddYoursTabBarViewController: UITabBarController, UITextFieldDelegate, UIT
         let contentInsets = UIEdgeInsetsMake(0, 0, keyboardSize.height, 0)
         var viewRect = view.frame
         viewRect.size.height -= keyboardSize.height
-        print("Visible Rect \(viewRect.size)")
-        if activeInputOrigin != nil && !CGRectContainsPoint(viewRect, activeInputOrigin!) {
+//        print("Visible Rect \(viewRect.size)")
+        if let point = activeInputOrigin where !CGRectContainsPoint(viewRect, point) {
             scrollView?.contentInset = contentInsets
-            scrollView?.scrollIndicatorInsets = contentInsets
-            let scrollPoint = CGPointMake(0, activeInputOrigin!.y - keyboardSize.height)
+//            scrollView?.scrollIndicatorInsets = contentInsets
+            let scrollPoint = CGPointMake(0, point.y /*- keyboardSize.height*/)
             scrollView?.setContentOffset(scrollPoint, animated: true)
         }
     }

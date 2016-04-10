@@ -8,13 +8,37 @@
 
 import UIKit
 import MessageUI
+import WebKit
 
 var isTheDefaultModel = true
 
 class CurriculumViewController: UIViewController, MFMailComposeViewControllerDelegate, UIScrollViewDelegate, CurriculumEditorDelegate {
 
     let defaults = NSUserDefaults.standardUserDefaults()
-    var selectedTemplate = Templates.omero 
+  
+    var selectedTemplate = Templates.defaultStyle {
+        didSet {
+            persistentTemplate = selectedTemplate
+        }
+    }
+
+    var persistentTemplate: String {
+        get {
+            if let templData = defaults.objectForKey("PersistentSelectedTemplate") as? NSData {
+                if let templ = NSKeyedUnarchiver.unarchiveObjectWithData(templData) as? String {
+                    return templ
+                }
+            }
+            return Templates.defaultStyle
+        }
+        set {
+            let templData = NSKeyedArchiver.archivedDataWithRootObject(newValue)
+            defaults.setObject(templData, forKey: "PersistentSelectedTemplate")
+            defaults.synchronize()
+        }
+    }
+    
+
     var curriculumModel: CurriculumVitae {
         get {
             // Here I return the persistent curriculum if there's any, othewise I'm just 
@@ -58,6 +82,7 @@ class CurriculumViewController: UIViewController, MFMailComposeViewControllerDel
     @IBOutlet weak var webViewer: UIWebView!
     @IBOutlet weak var homeButton: UIBarButtonItem!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var addEditLabel: UILabel!
     
     
     @IBAction func sendViaEmail() {
@@ -126,41 +151,34 @@ class CurriculumViewController: UIViewController, MFMailComposeViewControllerDel
         if let cv = cv as? CurriculumVitae {
             curriculum = cv
         }
+        selectedTemplate = persistentTemplate
         let htmlString = CvWebMaster.composeHtml(curriculum, template: selectedTemplate)
 //        print(htmlString)
         let baseURL = NSURL(fileURLWithPath: mainBundle.bundlePath)
      
         webViewer.loadHTMLString(htmlString, baseURL: baseURL)
+      
+//        webViewer.evaluateJavaScript(refreshImageJS, completionHandler: nil)
         
-//        NSURLCache.sharedURLCache().removeAllCachedResponses()
-//        let filename = getDocumentsDirectory().stringByAppendingString("/cv.html")
-//        do {
-//            let success = try Bool(htmlString.writeToURL(NSURL(fileURLWithPath: filename), atomically: true, encoding: NSUTF8StringEncoding))
-//            print("\nCREATED? \(success)\n" + filename)
-//        } catch let err as NSError {
-//            print(err.localizedDescription)
-//        }
-//        let requ = NSURLRequest(URL: NSURL(fileURLWithPath: filename), cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 60.0)
-//        webViewer.loadRequest(requ)
         hideUnderNavBar(self)
     }
 
     func reloadDefault() {
         loadCurriculum(CurriculumVitae())
-        curriculumModel = CurriculumVitae()
+//        curriculumModel = CurriculumVitae()
     }
     
     func printToPdf() {
         let pdfFormatter = webViewer.viewPrintFormatter()
         let pdfRenderer = UIPrintPageRenderer()
         pdfRenderer.addPrintFormatter(pdfFormatter, startingAtPageAtIndex: 0)
-        //let printablePage = CGRectInset(webViewer.frame, 0, 0)
+        let printablePage = CGRectInset(webViewer.frame, 8, 18)
         pdfRenderer.setValue(NSValue(CGRect: webViewer.frame), forKey: "paperRect")
-        pdfRenderer.setValue(NSValue(CGRect: webViewer.frame), forKey: "printableRect")
+        pdfRenderer.setValue(NSValue(CGRect: printablePage), forKey: "printableRect")
         let pdfData = NSMutableData()
        
         UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil)
-        for i in 0 ..< pdfRenderer.numberOfPages() {
+        for i in 0 ... pdfRenderer.numberOfPages() {
             UIGraphicsBeginPDFPageWithInfo(view.bounds, nil)
 //            print("outer rect: \n\(webViewer.bounds)")
 //            print("inner rect: \n\(UIGraphicsGetPDFContextBounds())")
@@ -213,17 +231,28 @@ class CurriculumViewController: UIViewController, MFMailComposeViewControllerDel
         underNavBarBottomLine.active = true
         underNavBarTopLine = underNavBar.topAnchor.constraintEqualToAnchor(topLayoutGuide.bottomAnchor)
         
+        loadCurriculum(curriculumModel)
+        
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.4 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             self.underNavBar.hidden = false
         }
         
-        loadCurriculum(curriculumModel)
-
         let tapSequence = UITapGestureRecognizer(target: self, action: #selector(CurriculumViewController.reloadDefault))
             tapSequence.numberOfTapsRequired = 3
             tapSequence.numberOfTouchesRequired = 2
         view.addGestureRecognizer(tapSequence)
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if isTheDefaultModel {
+            addEditLabel.text = "ADD YOURS"
+            addEditLabel.textColor = UIColor.redColor()
+        } else {
+            addEditLabel.text = "Edit"
+            addEditLabel.textColor = UIColor.lightGrayColor()
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -260,12 +289,12 @@ class CurriculumViewController: UIViewController, MFMailComposeViewControllerDel
     func saveProfileImageInMainBundle(imgData:NSData?) {
         if let data = imgData {
             let filename = getDocumentsDirectory().stringByAppendingPathComponent("myProfilePicture.jpg")
-            do {
-                let deleted = try Bool(NSFileManager.defaultManager().removeItemAtPath(filename))
-                print("\nDELETED? \(deleted)\n" + filename)
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
+//            do {
+//                let deleted = try Bool(NSFileManager.defaultManager().removeItemAtPath(filename))
+//                print("\nDELETED? \(deleted)\n" + filename)
+//            } catch let error as NSError {
+//                print(error.localizedDescription)
+//            }
             
             let success = Bool(data.writeToFile(filename, atomically: true))
             print("\nCREATED? \(success)\n" + filename)
@@ -317,16 +346,16 @@ func buttStylist(view:UIView) -> ()
 func stylist(view:UIView) {
     
     let transparent = UIColor.whiteColor().colorWithAlphaComponent(0)
-    let shadow = UIColor.whiteColor().colorWithAlphaComponent(0.3)
+    let shadow = UIColor.whiteColor().colorWithAlphaComponent(0.2)
     let radius: CGFloat = 3
     let borderWidth: CGFloat = 0.2
-//    UIColor.blueColor() //
     if let textField = view as? UITextField {
+        textField.autocapitalizationType = .Words
+        textField.clearButtonMode = .WhileEditing
         textField.backgroundColor = shadow
         textField.borderStyle = UITextBorderStyle.None
         textField.layer.cornerRadius = radius
         let h = textField.heightAnchor.constraintEqualToConstant(30)
-//            h.priority = 999
             h.active = true
     }
     else if let textView = view as? UITextView {
@@ -335,9 +364,6 @@ func stylist(view:UIView) {
         textView.layer.cornerRadius = radius
     }
     else if let header = view as? UITableViewHeaderFooterView {
-//        let parentRootView = rootSuperView(header)
-//        let bgColor = parentRootView.backgroundColor
-//        header.backgroundView?.backgroundColor = bgColor
         header.backgroundView?.backgroundColor = transparent
     }
     else if let tableCell = view as? UITableViewCell {

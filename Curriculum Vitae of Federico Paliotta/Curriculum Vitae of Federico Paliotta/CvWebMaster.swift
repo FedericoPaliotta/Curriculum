@@ -21,9 +21,21 @@ struct CvWebMaster {
         let docTitle = HtmlTagGenerator.title("\(cv.me != nil ? cv.me!.fullName : "" ) - Curriculum Vitae")
         let me =
             "<meta name=\"viewport\" content=\"width=device-width\"/> \n" +
-            "<meta name=\"description\" content=\"The Curriculum Vitae of Federico Paliotta.\"/> \n"
-        let ta =
+            "<meta name=\"description\" content=\"The Curriculum Vitae of Federico Paliotta.\"/> \n" +
             "<meta charset=\"UTF-8\"> \n"
+
+        let refreshImage =
+            "function refreshImage() { " +
+                "var src = document.getElementById('profImg').src; " +
+                "document.getElementById('profImg').src = 'fucking cash'; " +
+                "document.getElementById('profImg').src = src; " +
+        "}"
+
+        let ta = "<script type=\"text/javascript\">" +
+                 "\(refreshImage)" +
+                 "window.onload = refreshImage;" +
+                 "</script>"
+        
         let cssFile = "   -+=*!INJECT_CSS_HERE!*=+-   "
         let da = HtmlTagGenerator.style(cssFile)
 //            "<link type=\"text/css\" rel=\"stylesheet\" href=\"\(withTemplate ?? Templates.defaultStyle).css\"> \n"
@@ -51,12 +63,12 @@ struct CvWebMaster {
         else {
             imgPath = getDocumentsDirectory().stringByAppendingPathComponent("myProfilePicture.jpg")
         }
-        let headShotImg = HtmlTagGenerator.img(imgPath, alt: cv.me != nil ? cv.me!.fullName : "" )
+        let headShotImg = HtmlTagGenerator.img(imgPath, alt: cv.me != nil ? cv.me!.fullName : "", id: "profImg")
         let headShotDiv = HtmlTagGenerator.div(headShotImg, id: "headshot", cssClass: "quickFade")
         
         // Main Details Composition
         let name    = HtmlTagGenerator.h(1, content: cv.me != nil ? cv.me!.fullName : "" , cssClass: "quickFade delayTwo")
-        let title   = HtmlTagGenerator.h(2, content: cv.title ?? "", cssClass: "quickFade delayThree")
+        let title   = HtmlTagGenerator.h(2, content: cv.title ?? "", id: "cvTitle", cssClass: "quickFade delayThree")
         let nameDiv = HtmlTagGenerator.div(name + title, id: "name")
         
         let emailAddress = cv.me?.emailAddresses.first?.value as? String ?? ""
@@ -143,18 +155,24 @@ struct CvWebMaster {
         var secondSkillsSet = ""
         var thirdSkillsSet = ""
         var fourthSkillsSet = ""
-//        if let template = withTemplate {
             switch template {
             case Templates.william:
-                firstSkillsSet = HtmlTagGenerator.h(2, content: skills?[0].level.description ?? "") +
+                if skills?.count > 0 {
+                    firstSkillsSet = HtmlTagGenerator.h(2, content: skills?[0].level.description ?? "") +
                                  HtmlTagGenerator.p(skills?[0].description ?? "")
-                secondSkillsSet = HtmlTagGenerator.h(2, content: skills?[1].level.description ?? "") +
+                }
+                if skills?.count > 1 {
+                        secondSkillsSet = HtmlTagGenerator.h(2, content: skills?[1].level.description ?? "") +
                                   HtmlTagGenerator.p(skills?[1].description ?? "")
-                thirdSkillsSet = HtmlTagGenerator.h(2, content: skills?[2].level.description ?? "") +
+                }
+                if skills?.count > 2 {
+                    thirdSkillsSet = HtmlTagGenerator.h(2, content: skills?[2].level.description ?? "") +
                                  HtmlTagGenerator.p(skills?[2].description ?? "")
-                fourthSkillsSet = HtmlTagGenerator.h(2, content: skills?[3].level.description ?? "") +
+                }
+                if skills?.count > 3 {
+                    fourthSkillsSet = HtmlTagGenerator.h(2, content: skills?[3].level.description ?? "") +
                                   HtmlTagGenerator.p(skills?[3].description ?? "")
-                
+                }
                 sectionContent3 = firstSkillsSet + secondSkillsSet + thirdSkillsSet
             case Templates.omero:
                 // This is the default template's configuration of the Key Skills Section

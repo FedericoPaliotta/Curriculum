@@ -13,6 +13,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     var cvTitle: String!
     @IBOutlet weak var curriculumTitle: UITextField!
     
+    var cvBlog: String!
+    @IBOutlet weak var personalBlog: UITextField!
+    
     var profile: String!
     @IBOutlet weak var personalProfile: UITextView!
     
@@ -23,6 +26,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
 
         if let addEditTabBarController = tabBarController as? AddYoursTabBarViewController {
             addEditTabBarController.curriculumTitle = curriculumTitle.text
+            addEditTabBarController.curriculumBlog = personalBlog.text
             addEditTabBarController.curriculumProfile = personalProfile.text
             addEditTabBarController.done()
         }
@@ -40,16 +44,23 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
             navBar.delegate = addYoursTabBarVc
         }
         curriculumTitle.delegate = self
+        personalBlog.delegate = self
         personalProfile.delegate = self
         curriculumTitle.text = cvTitle
+        personalBlog.text = cvBlog
         personalProfile.text = profile
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        stylist(view)
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         if let addEditTabBarController = tabBarController as? AddYoursTabBarViewController {
             addEditTabBarController.curriculumTitle = cvTitle
             addEditTabBarController.curriculumProfile = profile
+            addEditTabBarController.curriculumBlog = cvBlog
         }
     }
     
@@ -69,6 +80,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     
     func textFieldDidEndEditing(textFild: UITextField) {
         cvTitle = curriculumTitle.text ?? cvTitle
+        cvBlog = personalBlog.text ?? cvBlog
     }
     
     func textViewDidEndEditing(textView: UITextView) {

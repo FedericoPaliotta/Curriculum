@@ -46,6 +46,10 @@ class JobsViewController: UIViewController, UITableViewDelegate, UITableViewData
             navBar.delegate = addYoursTabBarVc
         }
     }
+
+    override func viewWillAppear(animated: Bool) {
+        stylist(view)
+    }
     
     override func viewWillDisappear(animated: Bool) {
         if let addEditTabBarController = tabBarController as? AddYoursTabBarViewController {
@@ -105,9 +109,9 @@ class JobsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 jobCell.until.text = job.to
                 jobCell.duties.text = job.duties
                 
-                // MARK: //////////
+                // MARK: OH_MY_BUG //////////
                 jobCell.specs.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0)
-                ///////////////////
+                ///////////////////////////
                 
                 cell = jobCell
             }

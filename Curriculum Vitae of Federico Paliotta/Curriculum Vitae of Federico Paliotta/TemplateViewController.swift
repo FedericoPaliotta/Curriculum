@@ -12,7 +12,6 @@ class TemplateViewController: UICollectionViewController {
 
     var cv = CurriculumVitae()
     
-    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }

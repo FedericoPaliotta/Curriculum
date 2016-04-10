@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B632DFB1CB9D05E00223CF4 /* myProfilePicture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 864C05431BE5C7E30010424D /* myProfilePicture.jpg */; };
 		1BA169DE1CB1DC0F00A4436A /* TemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA169DD1CB1DC0F00A4436A /* TemplateViewController.swift */; };
 		1BCFD4FF1CA2DC25005D95BD /* KeySkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFD4FE1CA2DC25005D95BD /* KeySkillsViewController.swift */; };
 		1BCFD5011CA2E3DC005D95BD /* EducationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFD5001CA2E3DC005D95BD /* EducationViewController.swift */; };
 		1BDB8D961C9B32DC000B1C47 /* profilePicture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1BDB8D951C9B32DC000B1C47 /* profilePicture.jpg */; };
-		860C162F1BEDC50F0097F33D /* index-william.html in Resources */ = {isa = PBXBuildFile; fileRef = 860C162E1BEDC50F0097F33D /* index-william.html */; };
 		862D314D1BEC4F7A00DA6F7C /* style-william.css in Resources */ = {isa = PBXBuildFile; fileRef = 862D314C1BEC4F7A00DA6F7C /* style-william.css */; };
 		863732FA1BF51EC500F53048 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863732F91BF51EC500F53048 /* ContactViewController.swift */; };
 		863732FC1BF5CF2D00F53048 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863732FB1BF5CF2D00F53048 /* ProfileViewController.swift */; };
@@ -19,8 +19,6 @@
 		864C05561BE5C7E30010424D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 864C053C1BE5C7E30010424D /* LaunchScreen.storyboard */; };
 		864C05571BE5C7E30010424D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 864C053E1BE5C7E30010424D /* Main.storyboard */; };
 		864C05581BE5C7E30010424D /* CurriculumVitae.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C05401BE5C7E30010424D /* CurriculumVitae.swift */; };
-		864C05591BE5C7E30010424D /* index-omero.html in Resources */ = {isa = PBXBuildFile; fileRef = 864C05411BE5C7E30010424D /* index-omero.html */; };
-		864C055B1BE5C7E30010424D /* myProfilePicture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 864C05431BE5C7E30010424D /* myProfilePicture.jpg */; };
 		864C055C1BE5C7E30010424D /* style-omero.css in Resources */ = {isa = PBXBuildFile; fileRef = 864C05441BE5C7E30010424D /* style-omero.css */; };
 		864C055D1BE5C7E30010424D /* CurriculumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C05451BE5C7E30010424D /* CurriculumViewController.swift */; };
 		864C055F1BE7CC430010424D /* CvWebMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C055E1BE7CC430010424D /* CvWebMaster.swift */; };
@@ -88,9 +86,9 @@
 		86464FE71BE0022E00F5115C /* Curriculum */ = {
 			isa = PBXGroup;
 			children = (
+				864C052A1BE5C7E30010424D /* AppDelegate.swift */,
 				863732FB1BF5CF2D00F53048 /* ProfileViewController.swift */,
 				869E68FB1BF2EC9F00C843F8 /* CustomCellClasses.swift */,
-				864C052A1BE5C7E30010424D /* AppDelegate.swift */,
 				86A345A81BEEFC620050257D /* AddYoursTabBarViewController.swift */,
 				863732F91BF51EC500F53048 /* ContactViewController.swift */,
 				864C05451BE5C7E30010424D /* CurriculumViewController.swift */,
@@ -177,15 +175,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				860C162F1BEDC50F0097F33D /* index-william.html in Resources */,
 				862D314D1BEC4F7A00DA6F7C /* style-william.css in Resources */,
 				864C05561BE5C7E30010424D /* LaunchScreen.storyboard in Resources */,
-				864C055B1BE5C7E30010424D /* myProfilePicture.jpg in Resources */,
 				864C055C1BE5C7E30010424D /* style-omero.css in Resources */,
 				864C05571BE5C7E30010424D /* Main.storyboard in Resources */,
+				1B632DFB1CB9D05E00223CF4 /* myProfilePicture.jpg in Resources */,
 				86DF95291C010CED000E1929 /* Assets.xcassets in Resources */,
 				1BDB8D961C9B32DC000B1C47 /* profilePicture.jpg in Resources */,
-				864C05591BE5C7E30010424D /* index-omero.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,11 +321,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Curriculum Vitae of Federico Paliotta/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fpc.Curriculum;
 				PRODUCT_NAME = Curriculum;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -339,13 +337,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Curriculum Vitae of Federico Paliotta/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fpc.Curriculum;
 				PRODUCT_NAME = Curriculum;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

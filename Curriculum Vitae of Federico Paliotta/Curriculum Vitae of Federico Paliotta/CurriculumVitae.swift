@@ -143,6 +143,7 @@ class CurriculumVitae : NSObject, NSCoding
     required init?(coder aDecoder: NSCoder) {
         me = aDecoder.decodeObjectForKey("me") as? CNContact
         title = aDecoder.decodeObjectForKey("title") as? String
+        blog = aDecoder.decodeObjectForKey("blog") as? String
         profile = aDecoder.decodeObjectForKey("profile") as? String
         jobs = aDecoder.decodeObjectForKey("jobs") as? [Job]
         education = aDecoder.decodeObjectForKey("education") as? [Education]
@@ -154,12 +155,13 @@ class CurriculumVitae : NSObject, NSCoding
     }
     
     
-    required init(me: CNContact?, title: String?,
+    required init(me: CNContact?, title: String?, blog: String?,
                   profile: String?, jobs: [Job]?,
                   education: [Education]?,
                   skills: [SkillsSet]?) {
         self.me = me
         self.title = title
+        self.blog = blog
         self.profile = profile
         self.jobs = jobs
         self.education = education
@@ -193,6 +195,7 @@ class CurriculumVitae : NSObject, NSCoding
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(me, forKey: "me")
         aCoder.encodeObject(title, forKey: "title")
+        aCoder.encodeObject(blog, forKey: "blog")
         aCoder.encodeObject(jobs, forKey: "jobs")
         aCoder.encodeObject(education, forKey: "education")
         aCoder.encodeObject(skills, forKey: "skills")

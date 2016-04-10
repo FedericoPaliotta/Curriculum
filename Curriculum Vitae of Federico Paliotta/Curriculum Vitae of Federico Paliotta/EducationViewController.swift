@@ -41,6 +41,10 @@ class EducationViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        stylist(view)
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         if let addEditTabBarController = tabBarController as? AddYoursTabBarViewController {
             addEditTabBarController.curriculumEdus = educs
